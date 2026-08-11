@@ -1,15 +1,28 @@
-import { Geist, Geist_Mono, Public_Sans } from "next/font/google"
-
+import type { Metadata } from "next"
+import { Instrument_Serif, Geist } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const publicSans = Public_Sans({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
+const display = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-display",
+  weight: "400",
 })
+
+const body = Geist({
+  subsets: ["latin"],
+  variable: "--font-body",
+})
+
+export const metadata: Metadata = {
+  title: {
+    default: "Saints Club",
+    template: "%s · Saints Club",
+  },
+  description:
+    "Saints Club — a private society for professional life. Membership, lectures, dinners, and an executive committee elected each year.",
+}
 
 export default function RootLayout({
   children,
@@ -20,7 +33,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", publicSans.variable)}
+      className={cn("antialiased", display.variable, body.variable, "font-sans")}
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>
