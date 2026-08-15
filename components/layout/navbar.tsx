@@ -10,6 +10,11 @@ import {
   Landmark,
   Sparkles,
   BookOpen,
+  CalendarDays,
+  Scale,
+  Bell,
+  Users,
+  ClipboardList,
 } from "lucide-react"
 import { Logo } from "@/components/layout/logo"
 import { navLinks, type NavChild } from "@/lib/data"
@@ -19,13 +24,18 @@ import { Button, buttonVariants } from "@/components/ui/button"
 const childIcon: Record<string, typeof Landmark> = {
   "/about": BookOpen,
   "/committee": Landmark,
-  "/activities": Sparkles,
+  "/about#founders": Users,
+  "/facilities": Sparkles,
+  "/events": CalendarDays,
+  "/booking": ClipboardList,
+  "/governance": Scale,
+  "/notices": Bell,
 }
 
 export function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
-  const [aboutOpen, setAboutOpen] = useState(false)
+  const [openGroup, setOpenGroup] = useState<string | null>(null)
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/40 bg-white/55 shadow-sm backdrop-blur-xl">
@@ -38,7 +48,11 @@ export function Navbar() {
               link.href === "/"
                 ? pathname === "/"
                 : pathname === link.href ||
-                  Boolean(link.children?.some((c) => pathname.startsWith(c.href)))
+                  Boolean(
+                    link.children?.some((c) =>
+                      pathname.startsWith(c.href.split("#")[0])
+                    )
+                  )
 
             if (link.children) {
               return (
@@ -85,13 +99,13 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/admin"
+            href="/membership"
             className={cn(
-              buttonVariants({ variant: "outline", size: "sm" }),
+              buttonVariants({ size: "sm" }),
               "hidden sm:inline-flex"
             )}
           >
-            Admin
+            Join
           </Link>
 
           <Button
@@ -114,15 +128,20 @@ export function Navbar() {
                 <div key={link.href} className="py-1">
                   <button
                     type="button"
-                    onClick={() => setAboutOpen((v) => !v)}
+                    onClick={() =>
+                      setOpenGroup((v) => (v === link.href ? null : link.href))
+                    }
                     className="flex w-full items-center justify-between py-2.5 text-left text-base"
                   >
                     {link.label}
                     <ChevronDown
-                      className={cn("size-4 transition", aboutOpen && "rotate-180")}
+                      className={cn(
+                        "size-4 transition",
+                        openGroup === link.href && "rotate-180"
+                      )}
                     />
                   </button>
-                  {aboutOpen && (
+                  {openGroup === link.href && (
                     <div className="mb-2 ml-1 border-l border-primary/20 pl-3">
                       {link.children.map((child) => (
                         <Link
@@ -148,6 +167,13 @@ export function Navbar() {
                 </Link>
               )
             )}
+            <Link
+              href="/membership"
+              onClick={() => setOpen(false)}
+              className="mt-2 py-2.5 text-base font-medium text-primary"
+            >
+              Join
+            </Link>
           </nav>
         </div>
       )}

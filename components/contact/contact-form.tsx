@@ -12,16 +12,17 @@ export function ContactForm() {
   return (
     <>
       <PageHero
-        eyebrow="The house"
-        title="Write to the Secretariat"
-        description="Enquiries on membership, the programme, or the rooms. We reply within two working days."
+        eyebrow="Contact"
+        title="Registered Secretariat"
+        description="Enquiries on membership, the calendar, or the rooms. Write to the Secretariat in Dhaka."
       />
 
       <section className="py-16 sm:py-24">
         <div className="mx-auto grid max-w-6xl gap-16 px-5 sm:px-8 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-4">
             {[
-              { label: "Address", value: clubInfo.address },
+              { label: "Club", value: clubInfo.name },
+              { label: "Registered office", value: clubInfo.address },
               {
                 label: "Email",
                 value: clubInfo.email,
@@ -32,7 +33,6 @@ export function ContactForm() {
                 value: clubInfo.phone,
                 href: `tel:${clubInfo.phone.replace(/\s/g, "")}`,
               },
-              { label: "Hours", value: clubInfo.hours },
             ].map(({ label, value, href }) => (
               <div key={label} className="border-t border-border pt-4">
                 <p className="text-[11px] tracking-[0.16em] text-gold uppercase">
@@ -82,7 +82,7 @@ export function ContactForm() {
                 size="lg"
                 className="h-10 rounded-sm bg-ink px-5 text-white hover:bg-ink-soft"
               >
-                Send
+                Send enquiry
               </Button>
               {sent && (
                 <p className="text-sm text-muted-foreground">
@@ -91,6 +91,27 @@ export function ContactForm() {
                 </p>
               )}
             </form>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <h2 className="font-display text-3xl tracking-tight text-ink">
+            Location
+          </h2>
+          <p className="mt-3 max-w-xl text-[15px] text-muted-foreground">
+            Registered office, Dhaka, Bangladesh. A precise map will be published
+            when the house address is confirmed.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-3xl ring-1 ring-foreground/5">
+            <iframe
+              title="Saints Club Limited, Dhaka"
+              src="https://maps.google.com/maps?q=Dhaka%2C%20Bangladesh&z=12&output=embed"
+              className="h-[22rem] w-full border-0 grayscale"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>

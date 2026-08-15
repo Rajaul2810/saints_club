@@ -1,9 +1,10 @@
 import { Hero } from "@/components/home/hero"
 import {
   HomeIntro,
+  HomePrinciples,
+  HomeWelcome,
+  HomeQuickLinks,
   HomeEvents,
-  HomeActivities,
-  HomeNews,
   HomeNotices,
   HomeCta,
 } from "@/components/home/sections"
@@ -13,9 +14,10 @@ export default function HomePage() {
     <>
       <Hero />
       <HomeIntro />
+      <HomePrinciples />
+      <HomeWelcome />
+      <HomeQuickLinks />
       <HomeEvents />
-      <HomeActivities />
-      <HomeNews />
       <HomeNotices />
       <HomeCta />
     </>

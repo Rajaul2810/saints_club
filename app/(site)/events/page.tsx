@@ -9,9 +9,9 @@ export default function EventsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Programme"
-        title="The calendar"
-        description="Dinners, lectures, sport, and the foundation — for members and introduced guests."
+        eyebrow="Calendar"
+        title="Events of the house"
+        description="Family nights, alumni reunions, sport, cultural evenings, and members’ dinners."
       />
 
       <section className="py-16 sm:py-24">

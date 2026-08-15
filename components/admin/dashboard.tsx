@@ -27,8 +27,8 @@ const tabs = [
   { id: "events", label: "Events", icon: CalendarDays },
   { id: "news", label: "News", icon: Newspaper },
   { id: "notices", label: "Notices", icon: Newspaper },
-  { id: "activities", label: "Activities", icon: Sparkles },
-  { id: "committee", label: "Committee", icon: Landmark },
+  { id: "activities", label: "Facilities", icon: Sparkles },
+  { id: "committee", label: "Board", icon: Landmark },
 ] as const
 
 type TabId = (typeof tabs)[number]["id"]
@@ -81,7 +81,7 @@ export function AdminDashboard() {
                 { label: "Events", value: events.length },
                 { label: "News", value: news.length },
                 { label: "Notices", value: notices.length },
-                { label: "Programmes", value: activities.length },
+                { label: "Facilities", value: activities.length },
               ].map((stat) => (
                 <div key={stat.label} className="bg-white p-5">
                   <p className="text-[13px] text-muted-foreground">{stat.label}</p>
@@ -93,7 +93,7 @@ export function AdminDashboard() {
             </div>
             <div className="border border-border bg-white p-6">
               <h2 className="font-display text-xl tracking-tight text-ink">
-                Committee {current.year}
+                Board {current.year}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 {current.theme}
@@ -119,7 +119,7 @@ export function AdminDashboard() {
         {tab === "members" && (
           <AdminTable
             title="Members"
-            subtitle="Fellows and members"
+            subtitle="General Members (demonstration roll)"
             headers={["Member", "Standing", "Profession", "Since"]}
             rows={members.map((m) => [
               <Person key={m.id} name={m.name} image={m.image} />,
@@ -174,16 +174,16 @@ export function AdminDashboard() {
 
         {tab === "activities" && (
           <AdminTable
-            title="Activities"
-            subtitle="Standing programmes"
-            headers={["Programme", "Schedule"]}
+            title="Facilities"
+            subtitle="Club life"
+            headers={["Facility", "Access"]}
             rows={activities.map((a) => [a.title, a.schedule])}
           />
         )}
 
         {tab === "committee" && (
           <AdminTable
-            title={`Committee ${current.year}`}
+            title={`Board ${current.year}`}
             subtitle={current.theme}
             headers={["Name", "Office", "Email"]}
             rows={current.members.map((m) => [

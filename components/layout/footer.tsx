@@ -31,8 +31,8 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Logo light />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
-              {clubInfo.tagline}. Established {clubInfo.founded}. Membership by
-              election.
+              {clubInfo.tagline} {clubInfo.legalForm}. Formerly{" "}
+              {clubInfo.formerName}.
             </p>
             <div className="mt-6 flex gap-2">
               <SocialIcon label="Instagram" href={clubInfo.socials.instagram}>
@@ -75,7 +75,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-[11px] font-medium tracking-[0.18em] text-white/40 uppercase">
-              The House
+              Registered office
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-white/65">
               <li>{clubInfo.address}</li>
@@ -89,14 +89,18 @@ export function Footer() {
                   {clubInfo.phone}
                 </a>
               </li>
-              <li>{clubInfo.hours}</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Saints Club</p>
-          <p>Demo content · Database to follow</p>
+          <p>© {new Date().getFullYear()} {clubInfo.name}</p>
+          <p className="flex gap-4">
+            <span>Company limited by guarantee · Companies Act, 1994</span>
+            <Link href="/admin" className="hover:text-white/60">
+              Admin
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

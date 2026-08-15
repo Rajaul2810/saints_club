@@ -15,7 +15,7 @@ export type EventItem = {
   date: string
   time: string
   location: string
-  category: "Dinner" | "Lecture" | "Sport" | "Salon" | "Philanthropy"
+  category: "Dinner" | "Family" | "Sport" | "Cultural" | "Reunion"
   image: string
   gallery: string[]
   description: string
@@ -48,7 +48,7 @@ export type Activity = {
   description: string
   schedule: string
   image: string
-  icon: "lecture" | "sport" | "salon" | "philanthropy" | "wine" | "letters"
+  icon: "family" | "sport" | "dining" | "culture"
 }
 
 export type CommitteeMember = {
@@ -67,13 +67,17 @@ export type CommitteeYear = {
 }
 
 export const clubInfo = {
-  name: "Saints Club",
-  tagline: "A private society for professional life",
-  founded: 2012,
-  email: "secretary@saintsclub.org",
-  phone: "+1 (555) 214-9080",
-  address: "18 St. James Place, Springfield",
-  hours: "Tue–Sat 11:00–22:00",
+  name: "Saints Club Limited",
+  shortName: "Saints Club",
+  formerName: "Gregorian Alumni Club Limited",
+  tagline:
+    "A premier, family-centric social club built on tradition, fraternity, and excellence.",
+  legalForm: "Company limited by guarantee under the Companies Act, 1994",
+  memberCeiling: "2,318",
+  email: "info@saintsclub.com",
+  phone: "+880 2 XXX XXXX",
+  address: "Dhaka, Bangladesh",
+  hours: "Members, spouses, and dependent children · See the notice board for house hours",
   socials: {
     instagram: "#",
     facebook: "#",
@@ -82,458 +86,672 @@ export const clubInfo = {
   },
 }
 
+export const presidentMessage = {
+  title: "A welcome from the President",
+  body: "On behalf of the Board of Directors, I welcome you to Saints Club Limited. We exist so that alumni of Bangladesh’s missionary schools — and their families — may share a house of fellowship, sport, dining, and culture. Whether you are considering membership or already among us, you will find a club that values courtesy, heritage, and a genuine place for spouses and children. I look forward to greeting you at the house.",
+  signoff: "The President",
+  office: "Board of Directors",
+}
+
+export const schools = [
+  {
+    name: "St. Gregory's High School",
+    year: 1882,
+    location: "Luxmibazar, Dhaka",
+  },
+  {
+    name: "St. Joseph Higher Secondary School",
+    year: 1954,
+    location: "Mohammadpur, Dhaka",
+  },
+  {
+    name: "Holy Cross Girls' High School",
+    year: 1951,
+    location: "Tejgaon, Dhaka",
+  },
+  {
+    name: "St. Francis Xavier's Girls High School",
+    year: 1912,
+    location: "Luxmibazar, Dhaka",
+  },
+  {
+    name: "St. Placid's School",
+    year: 1853,
+    location: "Patharghata, Chattogram",
+  },
+  {
+    name: "St. Scholastica's Girls' School",
+    year: 1883,
+    location: "Patharghata, Chattogram",
+  },
+  {
+    name: "S.F.X. Greenherald International School",
+    year: 1972,
+    location: "Mohammadpur, Dhaka",
+  },
+]
+
+export const corePrinciples = [
+  {
+    title: "Family-centric atmosphere",
+    body: "Designed as a congenial environment for members, spouses, and children.",
+  },
+  {
+    title: "Shared heritage",
+    body: "Rooted in the educational traditions of seven missionary schools across Bangladesh.",
+  },
+  {
+    title: "Comprehensive amenities",
+    body: "Premier dining, fitness, sports, lounge, and event facilities under one roof.",
+  },
+]
+
+export const eligibility = [
+  "Be an alumnus or alumna of one of the seven designated missionary schools.",
+  "Be at least 24 years of age and of sound mind.",
+  "Meet the Club’s ethical and legal conduct guidelines.",
+]
+
+export const generalMembership = [
+  {
+    name: "Founder Members",
+    fee: "Recognized at inception",
+    subscription: "Exempt from monthly subscriptions",
+    quota: "Foundational roll",
+    detail:
+      "Recognized for foundational contributions during the Club’s inception.",
+  },
+  {
+    name: "Donor Members",
+    fee: "BDT 5,00,000",
+    subscription: "Exempt from monthly subscriptions",
+    quota: "Maximum 300",
+    detail: "Entry fee of BDT 5,00,000. Full General Member rights.",
+  },
+  {
+    name: "Life Members",
+    fee: "BDT 3,00,000",
+    subscription: "Exempt from monthly subscriptions",
+    quota: "Maximum 500",
+    detail: "Entry fee of BDT 3,00,000. Full General Member rights.",
+  },
+  {
+    name: "Permanent Members",
+    fee: "BDT 1,00,000",
+    subscription: "BDT 1,000 / month",
+    quota: "Maximum 1,500",
+    detail:
+      "Entry fee of BDT 1,00,000 with a monthly subscription of BDT 1,000.",
+  },
+  {
+    name: "Patron Members",
+    fee: "BDT 7,00,000",
+    subscription: "Exempt from monthly subscriptions",
+    quota: "By admission",
+    detail: "Entry fee of BDT 7,00,000. Exempt from monthly subscriptions.",
+  },
+]
+
+export const useMembership = [
+  {
+    name: "Corporate Membership",
+    fee: "BDT 10,00,000",
+    subscription: "BDT 3,000 / month",
+    detail:
+      "Allows nomination of up to three C-suite executives or Directors. Full facility privileges without voting rights.",
+  },
+  {
+    name: "Foreign / Expatriate Membership",
+    fee: "BDT 2,00,000",
+    subscription: "BDT 2,000 / month",
+    detail: "For eligible persons resident in Bangladesh on expatriate terms.",
+  },
+  {
+    name: "Non-Resident Membership",
+    fee: "USD 1,000",
+    subscription: "USD 1,000 / year",
+    detail: "For eligible alumni residing abroad.",
+  },
+  {
+    name: "Associate Membership",
+    fee: "As prescribed",
+    subscription: "As prescribed",
+    detail:
+      "For children of eligible members who turn 24 years of age.",
+  },
+  {
+    name: "Senior Membership",
+    fee: "As prescribed",
+    subscription: "As prescribed",
+    detail:
+      "For veteran members (15+ years) surrendering membership to their spouse or children while retaining personal facility rights.",
+  },
+  {
+    name: "Honorary & Diplomat Members",
+    fee: "By invitation",
+    subscription: "By invitation",
+    detail:
+      "Offered selectively to dignitaries and diplomats by invitation of the Board.",
+  },
+]
+
+export const feeSchedule = [
+  {
+    category: "Permanent",
+    admission: "BDT 1,00,000",
+    recurring: "BDT 1,000 / month",
+  },
+  {
+    category: "Life",
+    admission: "BDT 3,00,000",
+    recurring: "Exempt",
+  },
+  {
+    category: "Donor",
+    admission: "BDT 5,00,000",
+    recurring: "Exempt",
+  },
+  {
+    category: "Patron",
+    admission: "BDT 7,00,000",
+    recurring: "Exempt",
+  },
+  {
+    category: "Corporate",
+    admission: "BDT 10,00,000",
+    recurring: "BDT 3,000 / month",
+  },
+  {
+    category: "Foreign / Expatriate",
+    admission: "BDT 2,00,000",
+    recurring: "BDT 2,000 / month",
+  },
+  {
+    category: "Non-Resident",
+    admission: "USD 1,000",
+    recurring: "USD 1,000 / year",
+  },
+]
+
+export const applicationSteps = [
+  {
+    step: "01",
+    title: "Confirm eligibility",
+    body: "Applicants for General Membership must be alumni of a designated school, at least 24 years of age, and able to meet the Club’s conduct standards.",
+  },
+  {
+    step: "02",
+    title: "Proposal",
+    body: "A candidate is nominated and seconded by General Members in good standing, in the form prescribed by the Secretariat.",
+  },
+  {
+    step: "03",
+    title: "Scrutiny",
+    body: "The Membership Scrutiny Committee reviews the application, supporting papers, and standing of the proposers.",
+  },
+  {
+    step: "04",
+    title: "Board decision",
+    body: "The Board of Directors considers the Committee’s recommendation and admits members subject to quota and the Articles.",
+  },
+  {
+    step: "05",
+    title: "Admission",
+    body: "Upon payment of the prescribed fees, the member is entered on the roll and may enjoy the privileges of the house.",
+  },
+]
+
+export const standingCommittees = [
+  "Constitution & Legal Affairs",
+  "Disciplinary & Administration",
+  "Membership Scrutiny",
+  "Finance & Internal Audit",
+  "Lounge, Events & Cultural Affairs",
+  "Sports, Gym & Indoor Games",
+  "Bar & Beverage",
+  "IT & Publications",
+]
+
+export const conductPoints = [
+  "Members, spouses, children, and guests are expected to treat the house, staff, and one another with courtesy.",
+  "Derogatory behaviour, misconduct, or abuse of facilities is referred to the Disciplinary Committee.",
+  "Financial defaults, including unpaid subscriptions, are administered under the Articles and may affect privileges.",
+  "Appeals from disciplinary findings lie to the Appellate Committee. Certain disputes may be referred to Arbitration.",
+]
+
+export const facilities = [
+  {
+    id: "a1",
+    title: "Family & social environment",
+    description:
+      "A secure and welcoming house. Spouses and dependent children under 24 enjoy equal facility privileges with the member.",
+    schedule: "Members, spouses & children",
+    image:
+      "https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=900&h=700&fit=crop",
+    icon: "family" as const,
+  },
+  {
+    id: "a2",
+    title: "Sports, gym & indoor games",
+    description:
+      "A gym, indoor games room, and organised athletic programmes for members and their families.",
+    schedule: "Daily house hours",
+    image:
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&h=700&fit=crop",
+    icon: "sport" as const,
+  },
+  {
+    id: "a3",
+    title: "Dining, lounge & bar",
+    description:
+      "Gourmet dining, lounge spaces for private gatherings, and bar service for adult members and guests.",
+    schedule: "Lunch, dinner & private hire",
+    image:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=700&fit=crop",
+    icon: "dining" as const,
+  },
+  {
+    id: "a4",
+    title: "Events & cultural affairs",
+    description:
+      "Family nights, alumni reunions, holiday celebrations, and spaces for dinners and corporate meetings.",
+    schedule: "As published on the calendar",
+    image:
+      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=900&h=700&fit=crop",
+    icon: "culture" as const,
+  },
+]
+
+export const bookableSpaces = [
+  "Lounge",
+  "Private dining",
+  "Event hall",
+  "Meeting room",
+  "Indoor games (session)",
+]
+
 export const members: Member[] = [
   {
     id: "m1",
     name: "Amina Rahman",
-    role: "Fellow",
-    profession: "Constitutional Law",
+    role: "Life Member",
+    profession: "Holy Cross Girls' High School",
     joined: "2018",
     image:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop",
-    bio: "Partner at Hale & Rahman. Chairs the club’s legal salon.",
-    email: "amina@saintsclub.org",
+    bio: "General Member. Serves on Lounge, Events & Cultural Affairs.",
+    email: "amina@saintsclub.com",
   },
   {
     id: "m2",
-    name: "Daniel Okoye",
-    role: "Member",
-    profession: "Cardiology",
+    name: "Daniel D'Costa",
+    role: "Permanent Member",
+    profession: "St. Gregory's High School",
     joined: "2016",
     image:
       "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=500&fit=crop",
-    bio: "Consultant physician. Convenes the health policy breakfasts.",
-    email: "daniel@saintsclub.org",
+    bio: "General Member. Convenes weekend sport fixtures.",
+    email: "daniel@saintsclub.com",
   },
   {
     id: "m3",
-    name: "Sofia Chen",
-    role: "Fellow",
-    profession: "Architecture",
+    name: "Sofia Gomes",
+    role: "Donor Member",
+    profession: "St. Francis Xavier's Girls High School",
     joined: "2019",
     image:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop",
-    bio: "Principal at Chen Studio. Curates the built-environment series.",
-    email: "sofia@saintsclub.org",
+    bio: "General Member. Supports the Club’s cultural calendar.",
+    email: "sofia@saintsclub.com",
   },
   {
     id: "m4",
-    name: "Marcus Webb",
-    role: "Member",
-    profession: "Public Finance",
+    name: "Marcus Rozario",
+    role: "Permanent Member",
+    profession: "St. Joseph Higher Secondary School",
     joined: "2015",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop",
-    bio: "Investment director. Advises the philanthropy committee.",
-    email: "marcus@saintsclub.org",
+    bio: "General Member. Advises Finance & Internal Audit.",
+    email: "marcus@saintsclub.com",
   },
   {
     id: "m5",
-    name: "Priya Nair",
-    role: "Fellow",
-    profession: "Literature",
+    name: "Priya Costa",
+    role: "Life Member",
+    profession: "St. Scholastica's Girls' School",
     joined: "2020",
     image:
       "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=400&h=500&fit=crop",
-    bio: "Professor of English. Leads the monthly reading table.",
-    email: "priya@saintsclub.org",
+    bio: "General Member. Assists Membership Scrutiny.",
+    email: "priya@saintsclub.com",
   },
   {
     id: "m6",
-    name: "Leo Martins",
-    role: "Member",
-    profession: "Technology",
+    name: "Leo Pereira",
+    role: "Permanent Member",
+    profession: "S.F.X. Greenherald International School",
     joined: "2021",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=500&fit=crop",
-    bio: "Founder of Northline. Hosts the digital economy briefings.",
-    email: "leo@saintsclub.org",
+    bio: "General Member. Serves on IT & Publications.",
+    email: "leo@saintsclub.com",
   },
   {
     id: "m7",
-    name: "Hana Suzuki",
-    role: "Member",
-    profession: "Diplomacy",
+    name: "Hana D'Silva",
+    role: "Donor Member",
+    profession: "Holy Cross Girls' High School",
     joined: "2017",
     image:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop",
-    bio: "Former cultural attaché. Arranges visiting speaker dinners.",
-    email: "hana@saintsclub.org",
+    bio: "General Member. Arranges visiting family nights.",
+    email: "hana@saintsclub.com",
   },
   {
     id: "m8",
-    name: "James Porter",
-    role: "Fellow",
-    profession: "Political Economy",
+    name: "James Gomes",
+    role: "Founder Member",
+    profession: "St. Placid's School",
     joined: "2014",
     image:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=500&fit=crop",
-    bio: "Think-tank director. Moderates the Friday policy hour.",
-    email: "james@saintsclub.org",
+    bio: "Founder Member. Counsel to Constitution & Legal Affairs.",
+    email: "james@saintsclub.com",
   },
 ]
 
 export const events: EventItem[] = [
   {
     id: "e1",
-    title: "Autumn Members’ Dinner",
+    title: "Autumn Family Night",
     date: "2026-09-12",
-    time: "19:00",
-    location: "Great Hall",
-    category: "Dinner",
+    time: "18:30",
+    location: "Lounge & lawn",
+    category: "Family",
     image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop",
     ],
     description:
-      "The season opening dinner. Formal dress. Address by the incoming President, followed by conversation in the library.",
+      "An evening for members, spouses, and children. Dinner, music, and introductions for newly admitted families.",
     featured: true,
   },
   {
     id: "e2",
-    title: "Lecture: Cities After Capital",
+    title: "Alumni Reunion Dinner",
     date: "2026-09-28",
-    time: "18:30",
-    location: "Lecture Room",
-    category: "Lecture",
+    time: "19:00",
+    location: "Dining hall",
+    category: "Reunion",
     image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=800&fit=crop",
     ],
     description:
-      "An evening with visiting economist Dr. Lila Moreau on urban form, civic trust, and the next decade of city-making.",
+      "A table for the seven schools. Address by the President, followed by conversation in the lounge.",
   },
   {
     id: "e3",
-    title: "Saints Cup — Golf Day",
+    title: "Indoor Games Cup",
     date: "2026-10-05",
-    time: "08:30",
-    location: "Riverside Links",
+    time: "10:00",
+    location: "Indoor games room",
     category: "Sport",
     image:
-      "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1200&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&h=800&fit=crop",
     ],
     description:
-      "Annual invitation day for members and guests. Lunch in the clubhouse; prizes at four.",
+      "A day of fixtures for members and older children. Lunch in the dining room; prizes in the afternoon.",
   },
   {
     id: "e4",
-    title: "Salon: The Craft of Judgment",
+    title: "Cultural Evening",
     date: "2026-10-18",
-    time: "17:30",
-    location: "West Library",
-    category: "Salon",
+    time: "18:00",
+    location: "Event hall",
+    category: "Cultural",
     image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&h=800&fit=crop",
     ],
     description:
-      "A closed conversation on professional ethics, with short remarks from law, medicine, and the civil service.",
+      "Music and readings hosted by Lounge, Events & Cultural Affairs. Members and introduced guests.",
   },
   {
     id: "e5",
-    title: "Foundation Benefit Evening",
-    date: "2026-11-02",
-    time: "19:00",
-    location: "Great Hall",
-    category: "Philanthropy",
+    title: "Holiday Celebration",
+    date: "2026-12-20",
+    time: "17:00",
+    location: "House",
+    category: "Family",
     image:
-      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop",
     ],
     description:
-      "Proceeds support the club’s education bursaries. Black tie optional. Music after dinner.",
+      "A family gathering to close the year. Children welcome. Reservations at the Secretariat.",
   },
   {
     id: "e6",
-    title: "Winter Reception",
-    date: "2026-12-06",
-    time: "18:00",
-    location: "Drawing Room",
+    title: "Members’ Dinner",
+    date: "2026-11-07",
+    time: "19:30",
+    location: "Dining hall",
     category: "Dinner",
     image:
-      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop",
-      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&h=800&fit=crop",
     ],
     description:
-      "A quieter close to the year. Members and spouses. Introductions for those elected in autumn.",
+      "A quieter members’ table. Spouses welcome. Dress as published on the notice board.",
   },
 ]
 
 export const news: NewsItem[] = [
   {
     id: "n1",
-    title: "Foundation awards twelve bursaries for 2026",
+    title: "From Gregorian Alumni Club to Saints Club Limited",
     excerpt:
-      "The philanthropy committee has named this year’s scholars across law, medicine, and the arts.",
+      "The Club continues as a company limited by guarantee, bringing together alumni of seven missionary schools.",
     content:
-      "The Saints Club Foundation will support twelve students in 2026. Awards cover fees and a modest living stipend. Recipients were selected by an independent panel of members drawn from the professions.",
+      "Originally registered as Gregorian Alumni Club Limited, Saints Club Limited is incorporated under the Companies Act, 1994. The house remains a family-centric society for alumni of Bangladesh’s premier Christian missionary schools.",
     date: "2026-08-02",
     author: "Secretariat",
     image:
-      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&h=800&fit=crop",
-    tag: "Foundation",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    tag: "Club",
   },
   {
     id: "n2",
-    title: "Autumn lecture series opens with Cities After Capital",
+    title: "Autumn family nights return to the calendar",
     excerpt:
-      "Dr. Lila Moreau addresses members on urban form, civic trust, and the next decade of city-making.",
+      "Lounge, Events & Cultural Affairs has published the season’s family and reunion dates.",
     content:
-      "The programme chair has confirmed the autumn lecture. Members may reserve a place at the desk. A reception in the library follows the address.",
+      "Members may reserve a table at the Secretariat. Spouses and dependent children under 24 are welcome as of right.",
     date: "2026-07-22",
-    author: "Programme Chair",
+    author: "Lounge, Events & Cultural Affairs",
     image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=800&fit=crop",
-    tag: "Programme",
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&h=800&fit=crop",
+    tag: "Events",
   },
   {
     id: "n3",
-    title: "Clubhouse dining room restored for the season",
+    title: "Gym and indoor games room now on house hours",
     excerpt:
-      "The Great Hall returns to service after summer works, with a revised evening menu.",
+      "Sports, Gym & Indoor Games confirms daily access for members and families during published hours.",
     content:
-      "House Committee completed the hall refurbishment on schedule. Dinner service resumes on 1 September. Reservations are advised on lecture nights.",
+      "Organised fixtures will be announced on the notice board. Private hire of event spaces remains by booking.",
     date: "2026-07-10",
-    author: "House Committee",
+    author: "Sports, Gym & Indoor Games",
     image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=800&fit=crop",
-    tag: "House",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=800&fit=crop",
+    tag: "Facilities",
   },
 ]
 
 export const notices: Notice[] = [
   {
     id: "nt1",
-    title: "Nominations open for the 2026 Executive Committee",
+    title: "Nominations for the Board of Directors",
     excerpt:
-      "Fellows in good standing may stand for President, Secretary, Treasurer, and programme chairs. Nominations close 12 September.",
+      "General Members in good standing may nominate and second candidates for the President and Directors. Terms are two years. Particulars from the Secretariat.",
     date: "2026-07-28",
-    author: "General Secretary",
+    author: "Secretariat",
     tag: "Governance",
   },
   {
     id: "nt2",
-    title: "Library hours extended on lecture nights",
+    title: "Membership Scrutiny sitting dates",
     excerpt:
-      "The West Library remains open until 22:00 whenever a public lecture is held. Light refreshment at the bar.",
+      "The Membership Scrutiny Committee will meet on the last Thursday of each month. Complete papers must reach the Secretariat seven days prior.",
     date: "2026-07-14",
-    author: "House Committee",
-    tag: "House",
+    author: "Membership Scrutiny",
+    tag: "Membership",
   },
   {
     id: "nt3",
-    title: "Guide for newly elected members",
+    title: "Subscriptions and financial standing",
     excerpt:
-      "A short briefing on house customs, guest privileges, and how to propose a programme is available at the desk.",
+      "Permanent, Corporate, and Expatriate members are reminded that monthly subscriptions fall due on the first of each month. Defaults are referred under the Articles.",
     date: "2026-07-01",
-    author: "Secretariat",
-    tag: "Members",
+    author: "Finance & Internal Audit",
+    tag: "Finance",
   },
   {
     id: "nt4",
-    title: "Guest dining: two guests per member",
+    title: "Code of Conduct — house reminder",
     excerpt:
-      "From September, members may introduce two guests to dinner without prior leave. Larger parties require the House Chair.",
+      "Misconduct or derogatory behaviour may be referred to the Disciplinary Committee, with appeal to the Appellate Committee and, where provided, Arbitration.",
     date: "2026-06-20",
-    author: "House Committee",
-    tag: "House",
+    author: "Disciplinary & Administration",
+    tag: "Conduct",
   },
 ]
 
-export const activities: Activity[] = [
-  {
-    id: "a1",
-    title: "Lecture Series",
-    description:
-      "Monthly addresses by members and guests on law, letters, science, and public life.",
-    schedule: "Last Thursday · 18:30",
-    image:
-      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=900&h=700&fit=crop",
-    icon: "lecture",
-  },
-  {
-    id: "a2",
-    title: "Golf & Court",
-    description:
-      "Seasonal fixtures at Riverside Links and indoor tennis by arrangement.",
-    schedule: "Saturdays · 08:30",
-    image:
-      "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=900&h=700&fit=crop",
-    icon: "sport",
-  },
-  {
-    id: "a3",
-    title: "Reading Table",
-    description:
-      "A single book each month, discussed over dinner in the West Library.",
-    schedule: "Second Tuesday · 19:00",
-    image:
-      "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=900&h=700&fit=crop",
-    icon: "letters",
-  },
-  {
-    id: "a4",
-    title: "Foundation Work",
-    description:
-      "Bursary interviews, school partnerships, and the annual benefit evening.",
-    schedule: "As convened",
-    image:
-      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=900&h=700&fit=crop",
-    icon: "philanthropy",
-  },
-  {
-    id: "a5",
-    title: "Wine Committee",
-    description:
-      "Tastings led by members of the cellar, with notes circulated afterwards.",
-    schedule: "First Friday · 18:00",
-    image:
-      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=900&h=700&fit=crop",
-    icon: "wine",
-  },
-  {
-    id: "a6",
-    title: "Friday Salon",
-    description:
-      "An hour of structured conversation on a current professional question.",
-    schedule: "Fridays · 17:00",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&h=700&fit=crop",
-    icon: "salon",
-  },
-]
+export const activities: Activity[] = facilities
 
 export const committees: CommitteeYear[] = [
   {
     year: 2026,
-    theme: "Continuity & Exchange",
+    theme: "President and ten Directors · two-year term",
     members: [
       {
         id: "c1",
-        name: "Elena Vargas",
+        name: "Elena D'Rozario",
         position: "President",
         image:
           "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-        email: "president@saintsclub.org",
+        email: "president@saintsclub.com",
         year: 2026,
       },
       {
         id: "c2",
-        name: "Noah Kim",
-        position: "General Secretary",
+        name: "Noah Gomes",
+        position: "Director, Constitution & Legal Affairs",
         image:
           "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
-        email: "secretary@saintsclub.org",
+        email: "legal@saintsclub.com",
         year: 2026,
       },
       {
         id: "c3",
-        name: "Fatima Al-Hassan",
-        position: "Treasurer",
+        name: "Fatima Rahman",
+        position: "Director, Disciplinary & Administration",
         image:
           "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
-        email: "treasurer@saintsclub.org",
+        email: "discipline@saintsclub.com",
         year: 2026,
       },
       {
         id: "c4",
-        name: "Owen Blake",
-        position: "House Chair",
+        name: "Owen Pereira",
+        position: "Director, Membership Scrutiny",
         image:
           "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
-        email: "house@saintsclub.org",
+        email: "membership@saintsclub.com",
         year: 2026,
       },
       {
         id: "c5",
-        name: "Maya Ortiz",
-        position: "Programme Chair",
+        name: "Maya Costa",
+        position: "Director, Finance & Internal Audit",
         image:
           "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=400&h=400&fit=crop",
-        email: "programme@saintsclub.org",
+        email: "finance@saintsclub.com",
         year: 2026,
       },
       {
         id: "c6",
-        name: "Ryan Cole",
-        position: "Foundation Chair",
+        name: "Ryan D'Silva",
+        position: "Director, Lounge, Events & Cultural Affairs",
         image:
           "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-        email: "foundation@saintsclub.org",
+        email: "events@saintsclub.com",
         year: 2026,
       },
-    ],
-  },
-  {
-    year: 2025,
-    theme: "Stewardship",
-    members: [
       {
         id: "c7",
         name: "Isabella Cruz",
-        position: "President",
+        position: "Director, Sports, Gym & Indoor Games",
         image:
           "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop",
-        email: "isabella@saintsclub.org",
-        year: 2025,
+        email: "sports@saintsclub.com",
+        year: 2026,
       },
       {
         id: "c8",
         name: "Theo Lang",
-        position: "General Secretary",
+        position: "Director, Bar & Beverage",
         image:
           "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop",
-        email: "theo@saintsclub.org",
-        year: 2025,
+        email: "bar@saintsclub.com",
+        year: 2026,
       },
       {
         id: "c9",
         name: "Aisha Mensah",
-        position: "Treasurer",
+        position: "Director, IT & Publications",
         image:
           "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop",
-        email: "aisha@saintsclub.org",
-        year: 2025,
+        email: "publications@saintsclub.com",
+        year: 2026,
       },
       {
         id: "c10",
         name: "Ben Torres",
-        position: "House Chair",
+        position: "Director",
         image:
           "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop",
-        email: "ben@saintsclub.org",
-        year: 2025,
+        email: "board@saintsclub.com",
+        year: 2026,
+      },
+      {
+        id: "c11",
+        name: "Priya Nair",
+        position: "Director",
+        image:
+          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
+        email: "directors@saintsclub.com",
+        year: 2026,
       },
     ],
   },
 ]
 
 export const aboutStats = [
-  { label: "Members", value: "180" },
-  { label: "Years established", value: "14" },
-  { label: "Programmes a year", value: "40+" },
-  { label: "Bursaries awarded", value: "96" },
+  { label: "General Member ceiling", value: "2,318" },
+  { label: "Eligible schools", value: "7" },
+  { label: "Directors, with the President", value: "11" },
+  { label: "Standing committees", value: "8" },
 ]
 
 export type NavChild = {
@@ -556,37 +774,90 @@ export const navLinks: NavLink[] = [
     children: [
       {
         href: "/about",
-        label: "The club",
-        description: "History, house, and membership",
+        label: "Overview & history",
+        description: "Identity, mission, and the seven schools",
       },
       {
         href: "/committee",
-        label: "Committee",
-        description: "Officers elected each year",
+        label: "Board of Directors",
+        description: "President and ten Directors",
       },
       {
-        href: "/activities",
-        label: "Activities",
-        description: "Standing programmes of the house",
+        href: "/about#founders",
+        label: "Foundational Committee",
+        description: "The body that established the Club",
       },
     ],
   },
-  { href: "/members", label: "Members" },
-  { href: "/events", label: "Events" },
-  { href: "/news", label: "News" },
-  { href: "/notices", label: "Notices" },
+  { href: "/membership", label: "Membership" },
+  {
+    href: "/facilities",
+    label: "Club Life",
+    children: [
+      {
+        href: "/facilities",
+        label: "Facilities",
+        description: "Family, sport, dining, and culture",
+      },
+      {
+        href: "/events",
+        label: "Event calendar",
+        description: "Family nights, reunions, and dinners",
+      },
+      {
+        href: "/booking",
+        label: "Facility booking",
+        description: "Reserve lounge, dining, or the hall",
+      },
+    ],
+  },
+  {
+    href: "/governance",
+    label: "Governance",
+    children: [
+      {
+        href: "/governance",
+        label: "Articles & committees",
+        description: "Rules, discipline, and standing committees",
+      },
+      {
+        href: "/notices",
+        label: "Notice board",
+        description: "Official announcements of the Club",
+      },
+    ],
+  },
   { href: "/contact", label: "Contact" },
 ]
 
 export const footerLinks = [
   { href: "/about", label: "About" },
-  { href: "/members", label: "Members" },
+  { href: "/membership", label: "Membership" },
+  { href: "/facilities", label: "Club Life" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
+  { href: "/governance", label: "Governance" },
   { href: "/notices", label: "Notices" },
-  { href: "/activities", label: "Activities" },
-  { href: "/committee", label: "Committee" },
+  { href: "/committee", label: "Board of Directors" },
   { href: "/contact", label: "Contact" },
+]
+
+export const quickLinks = [
+  {
+    href: "/membership",
+    label: "Join",
+    description: "Eligibility, categories, and how to apply",
+  },
+  {
+    href: "/events",
+    label: "Event calendar",
+    description: "Family nights, reunions, and dinners",
+  },
+  {
+    href: "/booking",
+    label: "Facility booking",
+    description: "Reserve a lounge, dining room, or hall",
+  },
 ]
 
 export function formatDate(iso: string) {

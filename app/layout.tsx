@@ -1,27 +1,28 @@
 import type { Metadata } from "next"
-import { Instrument_Serif, Geist } from "next/font/google"
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
-const display = Instrument_Serif({
+const display = Outfit({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: "400",
+  display: "swap",
 })
 
-const body = Geist({
+const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
   title: {
-    default: "Saints Club",
-    template: "%s · Saints Club",
+    default: "Saints Club Limited",
+    template: "%s · Saints Club Limited",
   },
   description:
-    "Saints Club — a private society for professional life. Membership, lectures, dinners, and an executive committee elected each year.",
+    "Saints Club Limited — a family-centric social club for alumni of Bangladesh’s premier Christian missionary schools. Formerly Gregorian Alumni Club Limited.",
 }
 
 export default function RootLayout({

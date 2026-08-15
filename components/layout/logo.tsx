@@ -12,7 +12,7 @@ export function Logo({
     <Link
       href="/"
       className={cn("group inline-flex items-center gap-2.5", className)}
-      aria-label="Saints Club home"
+      aria-label="Saints Club Limited home"
     >
       <span
         className={cn(

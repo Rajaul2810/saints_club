@@ -18,8 +18,8 @@ export function CommitteeView() {
     <>
       <PageHero
         eyebrow="Governance"
-        title="The Executive Committee"
-        description="Elected each year by the membership to steward the house, the programme, and the foundation."
+        title="Board of Directors"
+        description="The Club’s day-to-day management is led by an elected Board consisting of the President and ten Directors, serving two-year terms."
       />
 
       <section className="py-16 sm:py-24">
@@ -30,7 +30,7 @@ export function CommitteeView() {
                 {current.theme}
               </p>
               <h2 className="font-display mt-2 text-3xl tracking-tight text-ink">
-                Committee {current.year}
+                Board {current.year}
               </h2>
             </div>
             <div className="flex gap-1">

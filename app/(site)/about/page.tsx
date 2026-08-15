@@ -2,19 +2,19 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { PageHero } from "@/components/shared/section-heading"
-import { aboutStats, clubInfo } from "@/lib/data"
+import { aboutStats, clubInfo, schools } from "@/lib/data"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export const metadata: Metadata = { title: "About" }
+export const metadata: Metadata = { title: "About Us" }
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About"
-        title="A private society of the professions"
-        description="Founded in 2012, Saints Club brings together members in law, medicine, letters, public service, and enterprise — for conversation, a shared table, and civic work."
+        eyebrow="About us"
+        title="Our identity and history"
+        description={`${clubInfo.name} was incorporated to foster lifelong bonds among alumni of distinguished Christian missionary schools in Bangladesh.`}
       />
 
       <section className="py-16 sm:py-24">
@@ -30,21 +30,22 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-[11px] font-medium tracking-[0.2em] text-gold uppercase">
-              Since {clubInfo.founded}
+              Formerly {clubInfo.formerName}
             </p>
             <h2 className="font-display mt-3 text-3xl tracking-tight text-ink sm:text-4xl">
-              The house, the programme, the committee
+              A company limited by guarantee
             </h2>
             <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
               <p>
-                Membership is by election. The house is kept for dining,
-                lectures, and quieter work. Guests are welcome when introduced
-                by a member.
+                Originally registered as {clubInfo.formerName},{" "}
+                {clubInfo.name} is a {clubInfo.legalForm.toLowerCase()}. We
+                bring together former students of Bangladesh’s premier Christian
+                missionary schools into a family-centric social community.
               </p>
               <p>
-                Each year the membership elects an Executive Committee —
-                President, Secretary, Treasurer, and chairs of House, Programme,
-                and Foundation — to steward rooms, calendar, and bursaries.
+                With a structured ceiling of {clubInfo.memberCeiling} General
+                Members, the Club maintains an exclusive yet warm atmosphere for
+                personal, social, and family growth.
               </p>
             </div>
             <Link
@@ -54,13 +55,44 @@ export default function AboutPage() {
                 "mt-8 h-10 rounded-sm bg-ink px-5 text-white hover:bg-ink-soft"
               )}
             >
-              This year’s committee
+              Board of Directors
             </Link>
           </div>
         </div>
       </section>
 
       <section className="border-y border-border bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
+            Mission &amp; vision
+          </h2>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
+            <div className="border-t border-border pt-5">
+              <h3 className="font-display text-xl tracking-tight text-ink">
+                Mission
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                To foster lifelong bonds among alumni of distinguished Christian
+                missionary schools in Bangladesh, and to keep a house where
+                members, spouses, and children may meet for fellowship, sport,
+                dining, and culture.
+              </p>
+            </div>
+            <div className="border-t border-border pt-5">
+              <h3 className="font-display text-xl tracking-tight text-ink">
+                Vision
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                A premier, family-centric social club built on tradition,
+                fraternity, and excellence — exclusive in number, warm in
+                character, and faithful to the heritage of the seven schools.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
           {aboutStats.map((stat) => (
             <div key={stat.label} className="border-t border-ink/15 pt-4">
@@ -75,36 +107,76 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="border-y border-border bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
+            Eligible institution heritage
+          </h2>
+          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
+            Saints Club welcomes alumni from the following seven missionary
+            schools.
+          </p>
+          <ol className="mt-12 divide-y divide-border border-y border-border">
+            {schools.map((school, index) => (
+              <li
+                key={school.name}
+                className="grid gap-2 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-baseline sm:gap-6"
+              >
+                <span className="text-[11px] tracking-[0.16em] text-gold uppercase">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="font-display text-xl tracking-tight text-ink">
+                    {school.name}
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {school.location}
+                  </p>
+                </div>
+                <p className="text-sm text-muted-foreground">{school.year}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
-            How the club is kept
+            Board of Directors
           </h2>
-          <div className="mt-12 grid gap-10 md:grid-cols-3">
-            {[
-              {
-                title: "Standing programmes",
-                body: "Lectures, the reading table, wine committee, and Friday salon — a regular life of the house.",
-              },
-              {
-                title: "The calendar",
-                body: "Members’ dinners, visiting speakers, sport, and the foundation benefit, announced each season.",
-              },
-              {
-                title: "Annual election",
-                body: "A new Executive Committee each year, drawn from fellows in good standing.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="border-t border-border pt-5">
-                <h3 className="font-display text-xl tracking-tight text-ink">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
+            Day-to-day management and governance are led by an elected Board of
+            Directors consisting of the President and ten Directors, serving
+            two-year terms.
+          </p>
+          <Link
+            href="/committee"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "mt-8 h-10 rounded-sm bg-ink px-5 text-white hover:bg-ink-soft"
+            )}
+          >
+            Meet the Board
+          </Link>
+        </div>
+      </section>
+
+      <section
+        id="founders"
+        className="scroll-mt-24 border-t border-border bg-white py-16 sm:py-24"
+      >
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <h2 className="font-display text-3xl tracking-tight text-ink sm:text-4xl">
+            Foundational Committee
+          </h2>
+          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
+            The Club was established by a Foundational Committee whose members
+            are recognised as Founder Members. They are exempt from monthly
+            subscriptions in acknowledgement of their contribution at inception.
+            The roll of the Foundational Committee is held at the registered
+            office and may be published here as the Secretariat confirms names.
+          </p>
         </div>
       </section>
     </>

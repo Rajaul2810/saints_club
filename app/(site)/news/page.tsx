@@ -10,8 +10,8 @@ export default function NewsPage() {
     <>
       <PageHero
         eyebrow="News"
-        title="Stories from the club"
-        description="Programme, the house, and the foundation — with a single photograph each."
+        title="From the Club"
+        description="The house, the calendar, and the facilities."
       />
 
       <section className="py-16 sm:py-24">

@@ -9,9 +9,9 @@ export default function NoticesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Notices"
-        title="From the secretariat"
-        description="Official notices of the house. No photographs — dates, authors, and the text only."
+        eyebrow="Notice board"
+        title="Official announcements"
+        description="Notices of the Secretariat and the standing committees. Dates, authors, and the text only."
       />
 
       <section className="py-16 sm:py-24">
