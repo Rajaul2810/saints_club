@@ -97,8 +97,8 @@ export function Footer() {
           <p>© {new Date().getFullYear()} {clubInfo.name}</p>
           <p className="flex gap-4">
             <span>Company limited by guarantee · Companies Act, 1994</span>
-            <Link href="/admin" className="hover:text-white/60">
-              Admin
+            <Link href="/login" className="hover:text-white/60">
+              Sign in
             </Link>
           </p>
         </div>

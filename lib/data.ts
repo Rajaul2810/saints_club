@@ -790,6 +790,7 @@ export const navLinks: NavLink[] = [
     ],
   },
   { href: "/membership", label: "Membership" },
+  { href: "/members", label: "Directory" },
   {
     href: "/facilities",
     label: "Club Life",
@@ -833,6 +834,7 @@ export const navLinks: NavLink[] = [
 export const footerLinks = [
   { href: "/about", label: "About" },
   { href: "/membership", label: "Membership" },
+  { href: "/members", label: "Directory" },
   { href: "/facilities", label: "Club Life" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },

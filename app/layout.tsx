@@ -35,6 +35,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={cn("antialiased", display.variable, body.variable, "font-sans")}
+      data-scroll-behavior="smooth"
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>

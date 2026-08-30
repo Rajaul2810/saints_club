@@ -6,11 +6,10 @@ import {
   aboutStats,
   clubInfo,
   corePrinciples,
-  events,
-  notices,
   presidentMessage,
   quickLinks,
 } from "@/lib/data"
+import { getPublishedEvents, getPublishedNotices } from "@/lib/content/queries"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -121,8 +120,10 @@ export function HomeQuickLinks() {
   )
 }
 
-export function HomeEvents() {
+export async function HomeEvents() {
+  const events = await getPublishedEvents()
   const featured = events.find((e) => e.featured) ?? events[0]
+  if (!featured) return null
   const rest = events.filter((e) => e.id !== featured.id).slice(0, 3)
 
   return (
@@ -152,7 +153,8 @@ export function HomeEvents() {
   )
 }
 
-export function HomeNotices() {
+export async function HomeNotices() {
+  const notices = await getPublishedNotices()
   return (
     <section className="border-y border-border bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">

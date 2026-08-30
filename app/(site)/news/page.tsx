@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
 import { PageHero } from "@/components/shared/section-heading"
 import { NewsCard } from "@/components/cards/news-card"
-import { news } from "@/lib/data"
+import { getPublishedNews } from "@/lib/content/queries"
 
 export const metadata: Metadata = { title: "News" }
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const news = await getPublishedNews()
   return (
     <>
       <PageHero

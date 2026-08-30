@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
 import { PageHero } from "@/components/shared/section-heading"
 import { EventCard } from "@/components/cards/event-card"
-import { events } from "@/lib/data"
+import { getPublishedEvents } from "@/lib/content/queries"
 
 export const metadata: Metadata = { title: "Events" }
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const events = await getPublishedEvents()
   return (
     <>
       <PageHero

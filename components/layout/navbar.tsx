@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -32,7 +33,7 @@ const childIcon: Record<string, typeof Landmark> = {
   "/notices": Bell,
 }
 
-export function Navbar() {
+export function Navbar({ auth }: { auth?: ReactNode }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
@@ -98,6 +99,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {auth}
           <Link
             href="/membership"
             className={cn(
@@ -168,9 +170,16 @@ export function Navbar() {
               )
             )}
             <Link
-              href="/membership"
+              href="/login"
               onClick={() => setOpen(false)}
               className="mt-2 py-2.5 text-base font-medium text-primary"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/membership"
+              onClick={() => setOpen(false)}
+              className="py-2.5 text-base font-medium text-primary"
             >
               Join
             </Link>
