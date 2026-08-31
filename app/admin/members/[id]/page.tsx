@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import { MemberForm } from "@/components/admin/member-form"
 import { getViewer } from "@/lib/auth/session"
 import { isEditorRole, isSuperAdmin } from "@/lib/auth/roles"
-import { getVisibleMember, listInstitutes, listMemberTypes } from "@/lib/members/queries"
+import { getVisibleMember, listMemberTypes } from "@/lib/members/queries"
 import { createClient } from "@/lib/supabase/server"
 
 export const metadata: Metadata = { title: "Member · Admin" }
@@ -14,11 +14,10 @@ export default async function AdminMemberDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const [viewer, member, types, institutes] = await Promise.all([
+  const [viewer, member, types] = await Promise.all([
     getViewer(),
     getVisibleMember(id),
     listMemberTypes(),
-    listInstitutes(),
   ])
   if (!member) notFound()
 
@@ -38,7 +37,6 @@ export default async function AdminMemberDetailPage({
     <MemberForm
       member={{ ...member, email, mobile }}
       types={types}
-      institutes={institutes}
       canEdit={isEditorRole(viewer?.role)}
       canDelete={isSuperAdmin(viewer?.role)}
     />

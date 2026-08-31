@@ -1,6 +1,7 @@
 import { isSupabaseConfigured } from "@/lib/supabase/env"
 import { createClient } from "@/lib/supabase/server"
 import type { VisibleMember } from "@/lib/members/fields"
+import { sortMemberTypes } from "@/lib/members/types"
 
 export const MEMBER_PAGE_SIZE = 25
 export const MEMBER_EXPORT_LIMIT = 10000
@@ -124,8 +125,7 @@ export async function listMemberTypes() {
   const { data } = await supabase
     .from("member_types")
     .select("id, code, name, quota_max, has_voting_rights, is_organisation")
-    .order("name")
-  return data ?? []
+  return sortMemberTypes(data ?? [])
 }
 
 export async function listInstitutes() {

@@ -63,6 +63,7 @@ create table if not exists public.members (
   last_name text,
   member_type_id uuid references public.member_types (id),
   institute_id uuid references public.institutes (id),
+  institute_name text,
   batch_year int,
   gender text,
   dob date,
@@ -375,7 +376,7 @@ begin
   if public.field_is_visible('institute', aud, m.id) then
     result := result || jsonb_build_object(
       'institute', inst.code,
-      'institute_name', inst.name
+      'institute_name', coalesce(nullif(trim(m.institute_name), ''), inst.name)
     );
   end if;
   if public.field_is_visible('job_title', aud, m.id) then
@@ -460,7 +461,10 @@ begin
     left join public.institutes i on i.id = m.institute_id
     left join public.member_types t on t.id = m.member_type_id
     where (include_inactive or m.status = 'active')
-      and (p_institute_code is null or i.code = p_institute_code)
+      and (
+        p_institute_code is null
+        or coalesce(m.institute_name, i.name, '') ilike '%' || p_institute_code || '%'
+      )
       and (p_type_code is null or t.code = p_type_code)
       and (p_batch_year is null or m.batch_year = p_batch_year)
       and (
@@ -479,7 +483,7 @@ begin
         )
         or (
           public.field_is_visible('institute', aud, m.id)
-          and coalesce(i.name, '') ilike '%' || q || '%'
+          and coalesce(m.institute_name, i.name, '') ilike '%' || q || '%'
         )
         or (
           public.field_is_visible('job_title', aud, m.id)

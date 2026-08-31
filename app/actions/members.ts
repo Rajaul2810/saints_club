@@ -58,7 +58,11 @@ export async function saveMember(formData: FormData) {
     last_name: emptyToNull(formData.get("last_name")),
     member_code: String(formData.get("member_code") ?? "").trim(),
     member_type_id: emptyToNull(formData.get("member_type_id")),
-    institute_id: emptyToNull(formData.get("institute_id")),
+    institute_id: await matchInstituteId(
+      supabase,
+      emptyToNull(formData.get("institute_name"))
+    ),
+    institute_name: emptyToNull(formData.get("institute_name")),
     batch_year: toInt(formData.get("batch_year")),
     gender: emptyToNull(formData.get("gender")),
     dob: emptyToNull(formData.get("dob")),
@@ -121,6 +125,16 @@ export async function deleteMember(formData: FormData) {
   if (error) throw new Error(error.message)
   revalidatePath("/admin/members")
   redirect("/admin/members")
+}
+
+async function matchInstituteId(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  name: string | null
+) {
+  if (!name) return null
+  const { data } = await supabase.from("institutes").select("id, name")
+  const match = data?.find((i) => i.name.toLowerCase() === name.toLowerCase())
+  return match?.id ?? null
 }
 
 function emptyToNull(value: FormDataEntryValue | null) {

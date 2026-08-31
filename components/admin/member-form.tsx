@@ -10,13 +10,11 @@ type Lookup = { id: string; code: string; name: string }
 export function MemberForm({
   member,
   types,
-  institutes,
   canEdit,
   canDelete,
 }: {
   member?: VisibleMember & { email?: string | null; mobile?: string | null }
   types: Lookup[]
-  institutes: Lookup[]
   canEdit: boolean
   canDelete: boolean
 }) {
@@ -39,8 +37,9 @@ export function MemberForm({
             name="member_type_id"
             defaultValue={types.find((t) => t.code === member?.member_type)?.id ?? ""}
             disabled={readOnly}
+            required
           >
-            <option value="">Select</option>
+            <option value="">Select type</option>
             {types.map((t) => (
               <option key={t.id} value={t.id}>
                 {t.name}
@@ -48,22 +47,12 @@ export function MemberForm({
             ))}
           </Select>
         </div>
-        <div>
-          <Label htmlFor="institute_id">Institute</Label>
-          <Select
-            id="institute_id"
-            name="institute_id"
-            defaultValue={institutes.find((i) => i.code === member?.institute)?.id ?? ""}
-            disabled={readOnly}
-          >
-            <option value="">Select</option>
-            {institutes.map((i) => (
-              <option key={i.id} value={i.id}>
-                {i.name}
-              </option>
-            ))}
-          </Select>
-        </div>
+        <Field
+          label="Institute"
+          name="institute_name"
+          defaultValue={member?.institute_name}
+          readOnly={readOnly}
+        />
         <Field label="Batch" name="batch_year" defaultValue={member?.batch_year} readOnly={readOnly} />
         <div>
           <Label htmlFor="status">Status</Label>

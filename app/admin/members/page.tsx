@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import {
   listVisibleMembers,
-  listInstitutes,
   listMemberTypes,
   MEMBER_PAGE_SIZE,
   parsePage,
@@ -30,7 +29,7 @@ export default async function AdminMembersPage({
   const params = await searchParams
   const page = parsePage(params.page)
   const batch = params.batch ? Number.parseInt(params.batch, 10) : undefined
-  const [viewer, list, institutes, types] = await Promise.all([
+  const [viewer, list, types] = await Promise.all([
     getViewer(),
     listVisibleMembers({
       query: params.q,
@@ -41,7 +40,6 @@ export default async function AdminMembersPage({
       limit: MEMBER_PAGE_SIZE,
       offset: (page - 1) * MEMBER_PAGE_SIZE,
     }),
-    listInstitutes(),
     listMemberTypes(),
   ])
   const canEdit = isEditorRole(viewer?.role)
@@ -82,17 +80,14 @@ export default async function AdminMembersPage({
       </div>
 
       <form className="mb-6 grid gap-3 sm:grid-cols-4" action="/admin/members">
-        <Input name="q" placeholder="Search" defaultValue={params.q} />
-        <Select name="institute" defaultValue={params.institute ?? ""}>
-          <option value="">All institutes</option>
-          {institutes.map((i) => (
-            <option key={i.id} value={i.code}>
-              {i.name}
-            </option>
-          ))}
-        </Select>
+        <Input name="q" placeholder="Search name" defaultValue={params.q} />
+        <Input
+          name="institute"
+          placeholder="Institute"
+          defaultValue={params.institute}
+        />
         <Select name="type" defaultValue={params.type ?? ""}>
-          <option value="">All types</option>
+          <option value="">All membership types</option>
           {types.map((t) => (
             <option key={t.id} value={t.code}>
               {t.name}

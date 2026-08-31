@@ -4,7 +4,6 @@ import { PageHero } from "@/components/shared/section-heading"
 import { Pager } from "@/components/shared/pager"
 import {
   listVisibleMembers,
-  listInstitutes,
   listMemberTypes,
   MEMBER_PAGE_SIZE,
   parsePage,
@@ -30,7 +29,7 @@ export default async function MembersDirectoryPage({
   const params = await searchParams
   const page = parsePage(params.page)
   const batch = params.batch ? Number.parseInt(params.batch, 10) : undefined
-  const [viewer, list, institutes, types] = await Promise.all([
+  const [viewer, list, types] = await Promise.all([
     getViewer(),
     listVisibleMembers({
       query: params.q,
@@ -40,7 +39,6 @@ export default async function MembersDirectoryPage({
       limit: MEMBER_PAGE_SIZE,
       offset: (page - 1) * MEMBER_PAGE_SIZE,
     }),
-    listInstitutes(),
     listMemberTypes(),
   ])
   const pageCount = Math.max(1, Math.ceil(list.total / MEMBER_PAGE_SIZE))
@@ -65,17 +63,14 @@ export default async function MembersDirectoryPage({
       <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <form className="mb-10 grid gap-3 sm:grid-cols-4" action="/members">
-            <Input name="q" placeholder="Search" defaultValue={params.q} />
-            <Select name="institute" defaultValue={params.institute ?? ""}>
-              <option value="">All institutes</option>
-              {institutes.filter((i) => i.is_eligible).map((i) => (
-                <option key={i.id} value={i.code}>
-                  {i.name}
-                </option>
-              ))}
-            </Select>
+            <Input name="q" placeholder="Search name" defaultValue={params.q} />
+            <Input
+              name="institute"
+              placeholder="Institute"
+              defaultValue={params.institute}
+            />
             <Select name="type" defaultValue={params.type ?? ""}>
-              <option value="">All types</option>
+              <option value="">All membership types</option>
               {types.map((t) => (
                 <option key={t.id} value={t.code}>
                   {t.name}

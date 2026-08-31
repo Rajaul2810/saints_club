@@ -31,7 +31,10 @@ export async function GET(request: Request) {
       columns
         .map((c) => {
           const record = m as unknown as Record<string, unknown>
-          const value = record[c] ?? (c === "first_name" ? m.name : "")
+          const value =
+            c === "institute"
+              ? (m.institute_name ?? record.institute ?? "")
+              : (record[c] ?? (c === "first_name" ? m.name : ""))
           return csvCell(String(value ?? ""))
         })
         .join(",")
