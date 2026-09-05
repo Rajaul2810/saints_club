@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Search } from "lucide-react"
 import { PageHero } from "@/components/shared/section-heading"
 import { Pager } from "@/components/shared/pager"
+import { MemberCard } from "@/components/cards/member-card"
 import {
   listVisibleMembers,
   listMemberTypes,
@@ -60,74 +62,73 @@ export default async function MembersDirectoryPage({
             : "Name, address, job title, and institute. Sign in to see the fields the Board has allowed for members."
         }
       />
-      <section className="py-16 sm:py-24">
+      <section className="bg-[linear-gradient(180deg,var(--mist)_0%,transparent_28%)] py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <form className="mb-10 grid gap-3 sm:grid-cols-4" action="/members">
-            <Input name="q" placeholder="Search name" defaultValue={params.q} />
-            <Input
-              name="institute"
-              placeholder="Institute"
-              defaultValue={params.institute}
-            />
-            <Select name="type" defaultValue={params.type ?? ""}>
-              <option value="">All membership types</option>
-              {types.map((t) => (
-                <option key={t.id} value={t.code}>
-                  {t.name}
-                </option>
-              ))}
-            </Select>
-            <div className="flex gap-2">
+          <form
+            action="/members"
+            className="mb-10 rounded-2xl border border-border/80 bg-white/90 p-4 shadow-sm shadow-ink/4 backdrop-blur-sm sm:p-5"
+          >
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_0.7fr_auto]">
+              <Input name="q" placeholder="Search name" defaultValue={params.q} />
+              <Input
+                name="institute"
+                placeholder="Institute"
+                defaultValue={params.institute}
+              />
+              <Select name="type" defaultValue={params.type ?? ""}>
+                <option value="">All membership types</option>
+                {types.map((t) => (
+                  <option key={t.id} value={t.code}>
+                    {t.name}
+                  </option>
+                ))}
+              </Select>
               <Input name="batch" placeholder="Batch" defaultValue={params.batch} />
-              <button type="submit" className={cn(buttonVariants(), "h-auto")}>
+              <button
+                type="submit"
+                className={cn(buttonVariants(), "inline-flex w-full gap-2 lg:w-auto")}
+              >
+                <Search className="size-4" aria-hidden />
                 Search
               </button>
             </div>
           </form>
 
-          <div className="overflow-x-auto border border-border bg-white">
-            <table className="w-full min-w-64 text-left text-sm">
-              <thead className="border-b border-border text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
-                <tr>
-                  <th className="px-4 py-3 font-medium">Name</th>
-                  <th className="px-4 py-3 font-medium">Institute</th>
-                  <th className="px-4 py-3 font-medium">Job title</th>
-                  <th className="px-4 py-3 font-medium">Address</th>
-                </tr>
-              </thead>
-              <tbody>
-                {list.members.map((m) => (
-                  <tr key={m.id} className="border-b border-border last:border-0 align-top">
-                    <td className="px-4 py-3">{m.name || "—"}</td>
-                    <td className="px-4 py-3">{m.institute_name ?? "—"}</td>
-                    <td className="px-4 py-3">{m.job_title ?? "—"}</td>
-                    <td className="max-w-sm px-4 py-3 whitespace-normal">{m.address ?? "—"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
           {list.members.length === 0 ? (
-            <p className="mt-6 text-sm text-muted-foreground">
-              No members match this search.
-              {!viewer && (
-                <>
-                  {" "}
-                  <Link href="/login" className="text-primary">
-                    Sign in
-                  </Link>{" "}
-                  if you are a member.
-                </>
-              )}
-            </p>
+            <div className="rounded-2xl border border-dashed border-border bg-white/70 px-6 py-16 text-center">
+              <p className="text-sm text-muted-foreground">
+                No members match this search.
+                {!viewer && (
+                  <>
+                    {" "}
+                    <Link href="/login" className="font-medium text-primary hover:underline">
+                      Sign in
+                    </Link>{" "}
+                    if you are a member.
+                  </>
+                )}
+              </p>
+            </div>
           ) : (
-            <Pager
-              basePath="/members"
-              params={filterParams}
-              page={Math.min(page, pageCount)}
-              pageCount={pageCount}
-              total={list.total}
-            />
+            <>
+              <p className="mb-5 text-sm text-muted-foreground">
+                Showing{" "}
+                <span className="font-medium text-ink">{list.members.length}</span> of{" "}
+                <span className="font-medium text-ink">{list.total}</span> members
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+                {list.members.map((member) => (
+                  <MemberCard key={member.id} member={member} />
+                ))}
+              </div>
+              <Pager
+                basePath="/members"
+                params={filterParams}
+                page={Math.min(page, pageCount)}
+                pageCount={pageCount}
+                total={list.total}
+              />
+            </>
           )}
         </div>
       </section>

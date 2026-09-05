@@ -2,6 +2,7 @@ import { Hero } from "@/components/home/hero"
 import {
   HomeIntro,
   HomePrinciples,
+  HomeFacilities,
   HomeWelcome,
   HomeQuickLinks,
   HomeEvents,
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Hero />
       <HomeIntro />
       <HomePrinciples />
+      <HomeFacilities />
       <HomeWelcome />
       <HomeQuickLinks />
       <HomeEvents />

@@ -9,9 +9,24 @@ import {
 import { isSupabaseConfigured } from "@/lib/supabase/env"
 import { createClient } from "@/lib/supabase/server"
 
+/** Remap Unsplash IDs that now 404 so seeded DB rows still render. */
+const BROKEN_UNSPLASH: Record<string, string> = {
+  "photo-1511632765486-a01980e01a43": "photo-1529156069898-49953e39b3ac",
+  "photo-1519167758481-83f29da8c2b0": "photo-1511795409834-ef04bbd61622",
+  "photo-1626224582412-4fdd0eb4795f": "photo-1612872087720-bb876e2e67d1",
+  "photo-1514320291840-3092126dace7": "photo-1493225457124-a3eb161ffa5f",
+}
+
+function remapBrokenMedia(url: string) {
+  for (const [from, to] of Object.entries(BROKEN_UNSPLASH)) {
+    if (url.includes(from)) return url.replace(from, to)
+  }
+  return url
+}
+
 function mediaUrl(path: string | null | undefined) {
   if (!path) return "/placeholder.svg"
-  if (path.startsWith("http")) return path
+  if (path.startsWith("http")) return remapBrokenMedia(path)
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL
   if (!base) return path
   return `${base}/storage/v1/object/public/public-media/${path}`

@@ -160,6 +160,9 @@
   .animate-rise-delay-3 {
     animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
   }
+  .animate-hero-zoom {
+    animation: hero-zoom 18s ease-out forwards;
+  }
 }
 
 @keyframes rise {
@@ -173,11 +176,21 @@
   }
 }
 
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-rise,
   .animate-rise-delay-1,
   .animate-rise-delay-2,
-  .animate-rise-delay-3 {
+  .animate-rise-delay-3,
+  .animate-hero-zoom {
     animation: none;
   }
 }

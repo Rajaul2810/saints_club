@@ -1033,7 +1033,7 @@ select * from (values
     timestamptz '2026-09-12 18:30+06',
     'Lounge & lawn',
     'Family',
-    'https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=800&fit=crop',
     true,
     true
   ),
@@ -1073,7 +1073,7 @@ select * from (values
     timestamptz '2026-12-20 17:00+06',
     'House',
     'Family',
-    'https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=800&fit=crop',
     true,
     false
   ),

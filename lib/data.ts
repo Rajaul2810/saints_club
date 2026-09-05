@@ -42,14 +42,33 @@ export type Notice = {
   tag: string
 }
 
-export type Activity = {
+export type FacilityIcon =
+  | "restaurant"
+  | "tea"
+  | "cigar"
+  | "pool"
+  | "cards"
+  | "lounge"
+
+export type ClubActivity = {
   id: string
   title: string
   description: string
   schedule: string
+  category: "Sport" | "Social" | "Cultural" | "Family" | "Wellness"
   image: string
-  icon: "family" | "sport" | "dining" | "culture"
 }
+
+export type GalleryItem = {
+  id: string
+  title: string
+  category: "Dining" | "Events" | "Facilities" | "Members" | "Sports"
+  image: string
+  caption: string
+}
+
+/** @deprecated Use ClubActivity — kept alias for older imports */
+export type Activity = ClubActivity
 
 export type CommitteeMember = {
   id: string
@@ -321,44 +340,64 @@ export const conductPoints = [
 
 export const facilities = [
   {
-    id: "a1",
-    title: "Family & social environment",
+    id: "f1",
+    title: "Ruchira Restaurant",
     description:
-      "A secure and welcoming house. Spouses and dependent children under 24 enjoy equal facility privileges with the member.",
-    schedule: "Members, spouses & children",
+      "The Club’s signature dining room — refined plates, attentive service, and a warm setting for family meals and guest dinners.",
+    schedule: "Lunch & dinner",
     image:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=900&h=700&fit=crop",
-    icon: "family" as const,
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=900&fit=crop",
+    icon: "restaurant" as const,
   },
   {
-    id: "a2",
-    title: "Sports, gym & indoor games",
+    id: "f2",
+    title: "Ispahani Tea Lounge",
     description:
-      "A gym, indoor games room, and organised athletic programmes for members and their families.",
+      "An elegant lounge for afternoon tea, quiet conversation, and light refreshments in a calm, polished atmosphere.",
+    schedule: "Daytime lounge hours",
+    image:
+      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1200&h=900&fit=crop",
+    icon: "tea" as const,
+  },
+  {
+    id: "f3",
+    title: "Mercedes Benz Cigar Bar",
+    description:
+      "A members’ bar for evening conversation — low light, classic pours, and a discreet setting for cigars and company.",
+    schedule: "Evening service",
+    image:
+      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1200&h=900&fit=crop",
+    icon: "cigar" as const,
+  },
+  {
+    id: "f4",
+    title: "Pool Room",
+    description:
+      "A dedicated billiards space for friendly matches and leisurely play among members and guests.",
     schedule: "Daily house hours",
     image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&h=700&fit=crop",
-    icon: "sport" as const,
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&h=900&fit=crop",
+    icon: "pool" as const,
   },
   {
-    id: "a3",
-    title: "Dining, lounge & bar",
+    id: "f5",
+    title: "Card Room",
     description:
-      "Gourmet dining, lounge spaces for private gatherings, and bar service for adult members and guests.",
-    schedule: "Lunch, dinner & private hire",
+      "A private room for cards and indoor games — quiet, well-kept, and reserved for members’ recreation.",
+    schedule: "Daily house hours",
     image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=700&fit=crop",
-    icon: "dining" as const,
+      "https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=1200&h=900&fit=crop",
+    icon: "cards" as const,
   },
   {
-    id: "a4",
-    title: "Events & cultural affairs",
+    id: "f6",
+    title: "Sapphire Lounge by Bank Asia",
     description:
-      "Family nights, alumni reunions, holiday celebrations, and spaces for dinners and corporate meetings.",
-    schedule: "As published on the calendar",
+      "A contemporary lounge for meetings and relaxed hosting — soft seating, calm light, and Club hospitality.",
+    schedule: "Members & invited guests",
     image:
-      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=900&h=700&fit=crop",
-    icon: "culture" as const,
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=900&fit=crop",
+    icon: "lounge" as const,
   },
 ]
 
@@ -470,9 +509,9 @@ export const events: EventItem[] = [
     location: "Lounge & lawn",
     category: "Family",
     image:
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1511632765486-a01980e01a43?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=800&fit=crop",
       "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop",
     ],
     description:
@@ -532,9 +571,9 @@ export const events: EventItem[] = [
     location: "House",
     category: "Family",
     image:
-      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=800&fit=crop",
     gallery: [
-      "https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=1200&h=800&fit=crop",
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=800&fit=crop",
     ],
     description:
       "A family gathering to close the year. Children welcome. Reservations at the Secretariat.",
@@ -637,7 +676,190 @@ export const notices: Notice[] = [
   },
 ]
 
-export const activities: Activity[] = facilities
+export const clubActivities: ClubActivity[] = [
+  {
+    id: "act1",
+    title: "Weekend Badminton Club",
+    description:
+      "Friendly doubles and mixed sessions for members and families. Rackets available at the games desk.",
+    schedule: "Saturdays · 4:00–7:00 pm",
+    category: "Sport",
+    image:
+      "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act2",
+    title: "Members’ Bridge Circle",
+    description:
+      "Weekly tables in the Card Room. Beginners welcome; partners can be arranged through the Secretariat.",
+    schedule: "Wednesdays · 7:00–10:00 pm",
+    category: "Social",
+    image:
+      "https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act3",
+    title: "Family Movie Night",
+    description:
+      "A monthly screening in the lounge for members, spouses, and children under 24 — snacks from Ruchira.",
+    schedule: "First Friday each month · 7:30 pm",
+    category: "Family",
+    image:
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act4",
+    title: "Classical Evening Series",
+    description:
+      "Intimate performances and alumni talent nights hosted in Sapphire Lounge and the dining hall.",
+    schedule: "Quarterly · evenings",
+    category: "Cultural",
+    image:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act5",
+    title: "Morning Wellness Walk",
+    description:
+      "A light group walk and stretch session before breakfast — open to all adult members.",
+    schedule: "Sundays · 7:00–8:00 am",
+    category: "Wellness",
+    image:
+      "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act6",
+    title: "Billiards League",
+    description:
+      "Seasonal handicap league in the Pool Room with prizes at the closing dinner.",
+    schedule: "Seasonal · weeknights",
+    category: "Sport",
+    image:
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act7",
+    title: "Ispahani Afternoon Tea Social",
+    description:
+      "A standing tea hour for conversation, networking, and welcoming new members.",
+    schedule: "Thursdays · 4:00–6:00 pm",
+    category: "Social",
+    image:
+      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "act8",
+    title: "Kids’ Holiday Workshop",
+    description:
+      "Crafts, games, and storytelling for dependent children during school holidays.",
+    schedule: "School holidays · mornings",
+    category: "Family",
+    image:
+      "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&h=800&fit=crop",
+  },
+]
+
+/** @deprecated Prefer clubActivities */
+export const activities = clubActivities
+
+export const galleryItems: GalleryItem[] = [
+  {
+    id: "g1",
+    title: "Ruchira dining room",
+    category: "Dining",
+    caption: "Evening service at Ruchira Restaurant",
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g2",
+    title: "Founders’ dinner",
+    category: "Events",
+    caption: "Annual founders’ dinner in the main hall",
+    image:
+      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g3",
+    title: "Sapphire Lounge",
+    category: "Facilities",
+    caption: "Sapphire Lounge by Bank Asia",
+    image:
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g4",
+    title: "Members’ gathering",
+    category: "Members",
+    caption: "Conversation after a Board reception",
+    image:
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g5",
+    title: "Pool Room match",
+    category: "Sports",
+    caption: "Friendly billiards in the Pool Room",
+    image:
+      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g6",
+    title: "Ispahani Tea Lounge",
+    category: "Facilities",
+    caption: "Afternoon light in the tea lounge",
+    image:
+      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g7",
+    title: "Cigar Bar evening",
+    category: "Dining",
+    caption: "Mercedes Benz Cigar Bar",
+    image:
+      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g8",
+    title: "Family night",
+    category: "Events",
+    caption: "Family night at the Club",
+    image:
+      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g9",
+    title: "Alumni reunion",
+    category: "Members",
+    caption: "Seven schools reunion weekend",
+    image:
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g10",
+    title: "Badminton session",
+    category: "Sports",
+    caption: "Weekend badminton club",
+    image:
+      "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g11",
+    title: "Private dining",
+    category: "Dining",
+    caption: "Private table at Ruchira",
+    image:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=900&fit=crop",
+  },
+  {
+    id: "g12",
+    title: "Cultural evening",
+    category: "Events",
+    caption: "Classical evening series",
+    image:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=900&fit=crop",
+  },
+]
 
 export const committees: CommitteeYear[] = [
   {
@@ -789,8 +1011,22 @@ export const navLinks: NavLink[] = [
       },
     ],
   },
-  { href: "/membership", label: "Membership" },
-  { href: "/members", label: "Directory" },
+  {
+    href: "/membership",
+    label: "Membership",
+    children: [
+      {
+        href: "/membership",
+        label: "Member Registration",
+        description: "Apply for membership and review eligibility",
+      },
+      {
+        href: "/members",
+        label: "Member Directory",
+        description: "Find and connect with fellow members",
+      },
+    ],
+  },
   {
     href: "/facilities",
     label: "Club Life",
@@ -798,44 +1034,31 @@ export const navLinks: NavLink[] = [
       {
         href: "/facilities",
         label: "Facilities",
-        description: "Family, sport, dining, and culture",
+        description: "Dining rooms, lounges, and games",
       },
       {
-        href: "/events",
-        label: "Event calendar",
-        description: "Family nights, reunions, and dinners",
+        href: "/gallery",
+        label: "Gallery",
+        description: "Moments from life at the Club",
       },
       {
-        href: "/booking",
-        label: "Facility booking",
-        description: "Reserve lounge, dining, or the hall",
+        href: "/activities",
+        label: "Activities",
+        description: "Sports, socials, and family programmes",
       },
     ],
   },
-  {
-    href: "/governance",
-    label: "Governance",
-    children: [
-      {
-        href: "/governance",
-        label: "Articles & committees",
-        description: "Rules, discipline, and standing committees",
-      },
-      {
-        href: "/notices",
-        label: "Notice board",
-        description: "Official announcements of the Club",
-      },
-    ],
-  },
+  { href: "/notices", label: "Notices" },
   { href: "/contact", label: "Contact" },
 ]
 
 export const footerLinks = [
   { href: "/about", label: "About" },
   { href: "/membership", label: "Membership" },
-  { href: "/members", label: "Directory" },
-  { href: "/facilities", label: "Club Life" },
+  { href: "/members", label: "Member Directory" },
+  { href: "/facilities", label: "Facilities" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/activities", label: "Activities" },
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
   { href: "/governance", label: "Governance" },
@@ -847,18 +1070,18 @@ export const footerLinks = [
 export const quickLinks = [
   {
     href: "/membership",
-    label: "Join",
+    label: "Membership",
     description: "Eligibility, categories, and how to apply",
   },
   {
-    href: "/events",
-    label: "Event calendar",
-    description: "Family nights, reunions, and dinners",
+    href: "/facilities",
+    label: "Facilities",
+    description: "Dining rooms, lounges, and games",
   },
   {
-    href: "/booking",
-    label: "Facility booking",
-    description: "Reserve a lounge, dining room, or hall",
+    href: "/gallery",
+    label: "Gallery",
+    description: "Moments from life at the Club",
   },
 ]
 
