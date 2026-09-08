@@ -17,11 +17,11 @@ export default async function VisibilityPage() {
     .select("field_key, audience, is_visible")
 
   return (
-    <div>
-      <h1 className="font-display text-3xl tracking-tight text-ink">
+    <div className="min-w-0">
+      <h1 className="font-display text-2xl tracking-tight text-ink sm:text-3xl">
         Field visibility
       </h1>
-      <p className="mt-2 mb-8 text-sm text-muted-foreground">
+      <p className="mt-2 mb-6 text-sm text-muted-foreground sm:mb-8">
         Club policy for the member directory. Changes are written to the audit
         log.
       </p>

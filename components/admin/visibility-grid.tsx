@@ -27,37 +27,43 @@ export function VisibilityGrid({
         else setSaved(true)
       }}
     >
-      <div className="overflow-x-auto border border-border bg-white">
-        <table className="w-full min-w-64 text-left text-sm">
-          <thead className="border-b border-border text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
-            <tr>
-              <th className="px-4 py-3 font-medium">Field</th>
-              {AUDIENCES.map((a) => (
-                <th key={a} className="px-4 py-3 font-medium">
-                  {a}
+      <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <div className="inline-block min-w-full rounded-2xl border border-border/80 bg-white align-middle">
+          <table className="w-full min-w-[560px] text-left text-sm">
+            <thead className="border-b border-border text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
+              <tr>
+                <th className="sticky left-0 z-10 bg-white px-4 py-3 font-medium">
+                  Field
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {FIELD_KEYS.map((field) => (
-              <tr key={field} className="border-b border-border last:border-0">
-                <td className="px-4 py-3">{FIELD_LABELS[field]}</td>
-                {AUDIENCES.map((audience) => (
-                  <td key={audience} className="px-4 py-3">
-                    <input
-                      type="checkbox"
-                      name={`${field}:${audience}`}
-                      defaultChecked={map.get(`${field}:${audience}`) === true}
-                      disabled={audience === "admin"}
-                      className="size-4 accent-primary"
-                    />
-                  </td>
+                {AUDIENCES.map((a) => (
+                  <th key={a} className="px-4 py-3 font-medium">
+                    {a}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {FIELD_KEYS.map((field) => (
+                <tr key={field} className="border-b border-border last:border-0">
+                  <td className="sticky left-0 z-10 bg-white px-4 py-3 whitespace-nowrap">
+                    {FIELD_LABELS[field]}
+                  </td>
+                  {AUDIENCES.map((audience) => (
+                    <td key={audience} className="px-4 py-3">
+                      <input
+                        type="checkbox"
+                        name={`${field}:${audience}`}
+                        defaultChecked={map.get(`${field}:${audience}`) === true}
+                        disabled={audience === "admin"}
+                        className="size-4 accent-primary"
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <p className="mt-4 text-sm text-muted-foreground">
         Admin always sees the club record. NID is never returned. Member consent

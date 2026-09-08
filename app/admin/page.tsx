@@ -43,43 +43,43 @@ export default async function AdminOverviewPage() {
 
   const stats = [
     {
-      label: "Members on roll",
+      label: "Members",
       value: members.total,
       href: "/admin/members",
       icon: Users,
-      hint: "Directory & records",
+      hint: "On roll",
     },
     {
       label: "Events",
       value: events.length,
       href: "/admin/events",
       icon: CalendarDays,
-      hint: "Published calendar",
+      hint: "Published",
     },
     {
       label: "News",
       value: news.length,
       href: "/admin/news",
       icon: Newspaper,
-      hint: "Published stories",
+      hint: "Stories",
     },
     {
       label: "Notices",
       value: notices.length,
       href: "/admin/notices",
       icon: Bell,
-      hint: "Official board",
+      hint: "Board",
     },
   ]
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5 sm:space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <p className="text-[11px] font-medium tracking-[0.16em] text-primary uppercase">
             Dashboard
           </p>
-          <h1 className="font-display mt-2 text-3xl tracking-tight text-ink sm:text-4xl">
+          <h1 className="font-display mt-1.5 text-2xl tracking-tight text-ink sm:mt-2 sm:text-4xl">
             Overview
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -88,14 +88,20 @@ export default async function AdminOverviewPage() {
           </p>
         </div>
         {canEdit && (
-          <div className="flex flex-wrap gap-2">
-            <Link href="/admin/members/new" className={cn(buttonVariants())}>
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+            <Link
+              href="/admin/members/new"
+              className={cn(buttonVariants(), "w-full justify-center sm:w-auto")}
+            >
               <UserPlus className="size-4" aria-hidden />
               Add member
             </Link>
             <Link
               href="/admin/notices/new"
-              className={cn(buttonVariants({ variant: "outline" }))}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "w-full justify-center sm:w-auto"
+              )}
             >
               Post notice
             </Link>
@@ -103,33 +109,37 @@ export default async function AdminOverviewPage() {
         )}
       </header>
 
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-2 gap-2.5 sm:gap-3 xl:grid-cols-4">
         {stats.map(({ label, value, href, icon: Icon, hint }) => (
           <Link
             key={label}
             href={href}
-            className="group rounded-2xl border border-border/80 bg-white p-5 shadow-sm shadow-ink/4 transition hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-md hover:shadow-primary/10"
+            className="group rounded-2xl border border-border/80 bg-white p-3.5 shadow-sm shadow-ink/4 transition hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 sm:p-5"
           >
-            <div className="flex items-start justify-between gap-3">
-              <span className="grid size-10 place-items-center rounded-xl bg-primary/10 text-primary">
-                <Icon className="size-4" aria-hidden />
+            <div className="flex items-start justify-between gap-2">
+              <span className="grid size-8 place-items-center rounded-lg bg-primary/10 text-primary sm:size-10 sm:rounded-xl">
+                <Icon className="size-3.5 sm:size-4" aria-hidden />
               </span>
-              <ArrowUpRight className="size-4 text-ink/25 transition group-hover:text-primary" />
+              <ArrowUpRight className="size-3.5 text-ink/25 transition group-hover:text-primary sm:size-4" />
             </div>
-            <p className="font-display mt-5 text-3xl tracking-tight text-ink">
+            <p className="font-display mt-3 text-2xl tracking-tight text-ink sm:mt-5 sm:text-3xl">
               {value}
             </p>
-            <p className="mt-1 text-sm font-medium text-ink">{label}</p>
-            <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>
+            <p className="mt-0.5 text-[13px] font-medium text-ink sm:mt-1 sm:text-sm">
+              {label}
+            </p>
+            <p className="mt-0.5 text-[11px] text-muted-foreground sm:text-xs">
+              {hint}
+            </p>
           </Link>
         ))}
       </section>
 
       {quota && (
-        <section className="rounded-2xl border border-border/80 bg-white p-5 shadow-sm shadow-ink/4 sm:p-6">
+        <section className="rounded-2xl border border-border/80 bg-white p-4 shadow-sm shadow-ink/4 sm:p-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="font-display text-xl tracking-tight text-ink">
+            <div className="min-w-0">
+              <h2 className="font-display text-lg tracking-tight text-ink sm:text-xl">
                 Membership quotas
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -139,7 +149,7 @@ export default async function AdminOverviewPage() {
             </div>
             <Link
               href="/admin/members"
-              className="text-[13px] font-medium text-primary hover:underline"
+              className="shrink-0 text-[13px] font-medium text-primary hover:underline"
             >
               Open members →
             </Link>
@@ -162,7 +172,7 @@ export default async function AdminOverviewPage() {
             </div>
           </div>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-5 grid gap-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
             {quota.types
               .filter((t) => t.max != null)
               .map((t) => {
@@ -170,10 +180,12 @@ export default async function AdminOverviewPage() {
                 return (
                   <div
                     key={t.code}
-                    className="rounded-xl border border-border/70 bg-[linear-gradient(180deg,var(--mist)_0%,white_70%)] p-4"
+                    className="rounded-xl border border-border/70 bg-[linear-gradient(180deg,var(--mist)_0%,white_70%)] p-3.5 sm:p-4"
                   >
-                    <p className="text-[13px] text-muted-foreground">{t.name}</p>
-                    <p className="mt-1 text-lg font-medium text-ink">
+                    <p className="truncate text-[13px] text-muted-foreground">
+                      {t.name}
+                    </p>
+                    <p className="mt-1 text-base font-medium text-ink sm:text-lg">
                       {t.used}
                       <span className="text-muted-foreground"> of {t.max}</span>
                     </p>
@@ -194,14 +206,14 @@ export default async function AdminOverviewPage() {
       )}
 
       <section className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-2xl border border-border/80 bg-white p-5 shadow-sm shadow-ink/4 sm:p-6">
+        <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-sm shadow-ink/4 sm:p-6">
           <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="font-display text-xl tracking-tight text-ink">
+            <h2 className="font-display text-lg tracking-tight text-ink sm:text-xl">
               Upcoming events
             </h2>
             <Link
               href="/admin/events"
-              className="text-[13px] font-medium text-primary hover:underline"
+              className="shrink-0 text-[13px] font-medium text-primary hover:underline"
             >
               Manage
             </Link>
@@ -211,7 +223,10 @@ export default async function AdminOverviewPage() {
           ) : (
             <ul className="divide-y divide-border/80">
               {upcoming.map((event) => (
-                <li key={event.id} className="flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0">
+                <li
+                  key={event.id}
+                  className="flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0"
+                >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium text-ink">
                       {event.title}
@@ -229,14 +244,14 @@ export default async function AdminOverviewPage() {
           )}
         </div>
 
-        <div className="rounded-2xl border border-border/80 bg-white p-5 shadow-sm shadow-ink/4 sm:p-6">
+        <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-sm shadow-ink/4 sm:p-6">
           <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="font-display text-xl tracking-tight text-ink">
+            <h2 className="font-display text-lg tracking-tight text-ink sm:text-xl">
               Latest notices
             </h2>
             <Link
               href="/admin/notices"
-              className="text-[13px] font-medium text-primary hover:underline"
+              className="shrink-0 text-[13px] font-medium text-primary hover:underline"
             >
               Manage
             </Link>
@@ -261,13 +276,13 @@ export default async function AdminOverviewPage() {
       </section>
 
       {canEdit && (
-        <section className="rounded-2xl border border-dashed border-primary/25 bg-primary/5 p-5 sm:p-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <section className="rounded-2xl border border-dashed border-primary/25 bg-primary/5 p-4 sm:p-6">
+          <div className="flex flex-col gap-4">
             <div className="flex gap-3">
               <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary text-white">
                 <ShieldAlert className="size-4" aria-hidden />
               </span>
-              <div>
+              <div className="min-w-0">
                 <h2 className="font-display text-lg tracking-tight text-ink">
                   Quick publishing
                 </h2>
@@ -276,20 +291,29 @@ export default async function AdminOverviewPage() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
               <Link
                 href="/admin/events/new"
-                className={cn(buttonVariants({ variant: "outline" }), "bg-white")}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "w-full justify-center bg-white sm:w-auto"
+                )}
               >
                 New event
               </Link>
               <Link
                 href="/admin/news/new"
-                className={cn(buttonVariants({ variant: "outline" }), "bg-white")}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "w-full justify-center bg-white sm:w-auto"
+                )}
               >
                 New news
               </Link>
-              <Link href="/admin/notices/new" className={cn(buttonVariants())}>
+              <Link
+                href="/admin/notices/new"
+                className={cn(buttonVariants(), "w-full justify-center sm:w-auto")}
+              >
                 New notice
               </Link>
             </div>

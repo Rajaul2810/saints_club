@@ -11,14 +11,42 @@ export default async function AuditPage() {
     .order("at", { ascending: false })
     .limit(100)
 
+  const rows = data ?? []
+
   return (
-    <div>
-      <h1 className="font-display text-3xl tracking-tight text-ink">Audit log</h1>
-      <p className="mt-2 mb-8 text-sm text-muted-foreground">
+    <div className="min-w-0">
+      <h1 className="font-display text-2xl tracking-tight text-ink sm:text-3xl">
+        Audit log
+      </h1>
+      <p className="mt-2 mb-6 text-sm text-muted-foreground sm:mb-8">
         Policy and consent changes. Newest first.
       </p>
-      <div className="overflow-x-auto border border-border bg-white">
-        <table className="w-full min-w-64 text-left text-sm">
+
+      <div className="space-y-3 md:hidden">
+        {rows.map((row) => (
+          <article
+            key={row.id}
+            className="rounded-2xl border border-border/80 bg-white p-4 shadow-sm shadow-ink/4"
+          >
+            <p className="text-xs text-muted-foreground">
+              {new Date(row.at).toLocaleString("en-GB")}
+            </p>
+            <p className="mt-1 font-medium text-ink">{row.action}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{row.entity}</p>
+            <p className="mt-2 break-words text-xs text-muted-foreground">
+              {summarize(row.before, row.after)}
+            </p>
+          </article>
+        ))}
+        {rows.length === 0 && (
+          <p className="rounded-2xl border border-dashed border-border bg-white px-4 py-10 text-center text-sm text-muted-foreground">
+            No audit entries yet.
+          </p>
+        )}
+      </div>
+
+      <div className="hidden overflow-x-auto rounded-2xl border border-border/80 bg-white md:block">
+        <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="border-b border-border text-[11px] tracking-[0.12em] text-muted-foreground uppercase">
             <tr>
               <th className="px-4 py-3 font-medium">When</th>
@@ -28,7 +56,7 @@ export default async function AuditPage() {
             </tr>
           </thead>
           <tbody>
-            {(data ?? []).map((row) => (
+            {rows.map((row) => (
               <tr key={row.id} className="border-b border-border last:border-0">
                 <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">
                   {new Date(row.at).toLocaleString("en-GB")}
@@ -48,7 +76,9 @@ export default async function AuditPage() {
 }
 
 function summarize(before: unknown, after: unknown) {
-  const a = after as { field_key?: string; audience?: string; is_visible?: boolean } | null
+  const a = after as
+    | { field_key?: string; audience?: string; is_visible?: boolean }
+    | null
   const b = before as { is_visible?: boolean } | null
   if (a?.field_key) {
     return `${a.field_key} / ${a.audience}: ${b?.is_visible ?? "—"} → ${a.is_visible}`
