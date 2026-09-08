@@ -17,7 +17,7 @@ export function NoticeForm({
   }
 }) {
   return (
-    <form action={saveNotice} className="max-w-2xl space-y-5">
+    <form action={saveNotice} className="w-full max-w-2xl min-w-0 space-y-5">
       {item && <input type="hidden" name="id" value={item.id} />}
       <div>
         <Label htmlFor="title">Title</Label>
@@ -62,7 +62,7 @@ export function EventForm({
     : "18:00"
 
   return (
-    <form action={saveEvent} className="max-w-2xl space-y-5">
+    <form action={saveEvent} className="w-full max-w-2xl min-w-0 space-y-5">
       {item && <input type="hidden" name="id" value={item.id} />}
       <div>
         <Label htmlFor="title">Title</Label>
@@ -125,7 +125,7 @@ export function NewsForm({
   }
 }) {
   return (
-    <form action={saveNews} className="max-w-2xl space-y-5">
+    <form action={saveNews} className="w-full max-w-2xl min-w-0 space-y-5">
       {item && <input type="hidden" name="id" value={item.id} />}
       <div>
         <Label htmlFor="title">Title</Label>

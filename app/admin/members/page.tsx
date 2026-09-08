@@ -88,16 +88,17 @@ export default async function AdminMembersPage({
       </div>
 
       <form
-        className="mb-5 grid gap-3 rounded-2xl border border-border/80 bg-white p-3 sm:mb-6 sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
+        className="mb-5 grid max-w-full gap-3 rounded-2xl border border-border/80 bg-white p-3 sm:mb-6 sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
         action="/admin/members"
       >
-        <Input name="q" placeholder="Search name" defaultValue={params.q} />
+        <Input name="q" placeholder="Search name" defaultValue={params.q} className="min-w-0" />
         <Input
           name="institute"
           placeholder="Institute"
           defaultValue={params.institute}
+          className="min-w-0"
         />
-        <Select name="type" defaultValue={params.type ?? ""}>
+        <Select name="type" defaultValue={params.type ?? ""} className="min-w-0">
           <option value="">All membership types</option>
           {types.map((t) => (
             <option key={t.id} value={t.code}>
@@ -105,8 +106,13 @@ export default async function AdminMembersPage({
             </option>
           ))}
         </Select>
-        <div className="flex gap-2">
-          <Input name="batch" placeholder="Batch" defaultValue={params.batch} />
+        <div className="flex min-w-0 gap-2">
+          <Input
+            name="batch"
+            placeholder="Batch"
+            defaultValue={params.batch}
+            className="min-w-0"
+          />
           <button
             type="submit"
             className={cn(buttonVariants(), "h-auto shrink-0")}

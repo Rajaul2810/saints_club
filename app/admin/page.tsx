@@ -73,27 +73,27 @@ export default async function AdminOverviewPage() {
   ]
 
   return (
-    <div className="space-y-5 sm:space-y-8">
+    <div className="min-w-0 max-w-full space-y-5 sm:space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="min-w-0">
+        <div className="min-w-0 max-w-full">
           <p className="text-[11px] font-medium tracking-[0.16em] text-primary uppercase">
             Dashboard
           </p>
-          <h1 className="font-display mt-1.5 text-2xl tracking-tight text-ink sm:mt-2 sm:text-4xl">
+          <h1 className="font-display mt-1.5 text-2xl tracking-tight wrap-break-word text-ink sm:mt-2 sm:text-4xl">
             Overview
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="mt-2 text-sm wrap-break-word text-muted-foreground">
             Signed in as {viewer ? roleLabel(viewer.role) : "staff"}. Live counts
             from the club roll and content board.
           </p>
         </div>
         {canEdit && (
-          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+          <div className="grid w-full grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:flex sm:w-auto sm:flex-wrap">
             <Link
               href="/admin/members/new"
               className={cn(buttonVariants(), "w-full justify-center sm:w-auto")}
             >
-              <UserPlus className="size-4" aria-hidden />
+              <UserPlus className="size-4 shrink-0" aria-hidden />
               Add member
             </Link>
             <Link
@@ -109,26 +109,26 @@ export default async function AdminOverviewPage() {
         )}
       </header>
 
-      <section className="grid grid-cols-2 gap-2.5 sm:gap-3 xl:grid-cols-4">
+      <section className="grid grid-cols-2 gap-2 sm:gap-3 xl:grid-cols-4">
         {stats.map(({ label, value, href, icon: Icon, hint }) => (
           <Link
             key={label}
             href={href}
-            className="group rounded-2xl border border-border/80 bg-white p-3.5 shadow-sm shadow-ink/4 transition hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 sm:p-5"
+            className="group min-w-0 rounded-2xl border border-border/80 bg-white p-3 shadow-sm shadow-ink/4 transition hover:border-primary/25 hover:shadow-md hover:shadow-primary/10 sm:p-5"
           >
             <div className="flex items-start justify-between gap-2">
-              <span className="grid size-8 place-items-center rounded-lg bg-primary/10 text-primary sm:size-10 sm:rounded-xl">
+              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:size-10 sm:rounded-xl">
                 <Icon className="size-3.5 sm:size-4" aria-hidden />
               </span>
-              <ArrowUpRight className="size-3.5 text-ink/25 transition group-hover:text-primary sm:size-4" />
+              <ArrowUpRight className="size-3.5 shrink-0 text-ink/25 transition group-hover:text-primary sm:size-4" />
             </div>
-            <p className="font-display mt-3 text-2xl tracking-tight text-ink sm:mt-5 sm:text-3xl">
+            <p className="font-display mt-3 truncate text-2xl tracking-tight text-ink sm:mt-5 sm:text-3xl">
               {value}
             </p>
-            <p className="mt-0.5 text-[13px] font-medium text-ink sm:mt-1 sm:text-sm">
+            <p className="mt-0.5 truncate text-[13px] font-medium text-ink sm:mt-1 sm:text-sm">
               {label}
             </p>
-            <p className="mt-0.5 text-[11px] text-muted-foreground sm:text-xs">
+            <p className="mt-0.5 truncate text-[11px] text-muted-foreground sm:text-xs">
               {hint}
             </p>
           </Link>
@@ -231,7 +231,7 @@ export default async function AdminOverviewPage() {
                     <p className="truncate text-sm font-medium text-ink">
                       {event.title}
                     </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="mt-1 truncate text-xs text-muted-foreground">
                       {formatDate(event.date)} · {event.location || "TBA"}
                     </p>
                   </div>

@@ -21,11 +21,14 @@ export function MemberForm({
   const readOnly = !canEdit
 
   return (
-    <div>
-      <h1 className="font-display text-3xl tracking-tight text-ink">
+    <div className="min-w-0 max-w-full">
+      <h1 className="font-display text-2xl tracking-tight wrap-break-word text-ink sm:text-3xl">
         {member ? member.name || member.member_code : "Add member"}
       </h1>
-      <form action={saveMember} className="mt-8 grid gap-5 sm:grid-cols-2">
+      <form
+        action={saveMember}
+        className="mt-6 grid max-w-full gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5"
+      >
         {member?.id && <input type="hidden" name="id" value={member.id} />}
         <Field label="First name" name="first_name" defaultValue={member?.first_name} readOnly={readOnly} />
         <Field label="Last name" name="last_name" defaultValue={member?.last_name} readOnly={readOnly} />
@@ -90,15 +93,17 @@ export function MemberForm({
           Needs review
         </label>
         {canEdit && (
-          <div className="sm:col-span-2">
-            <Button type="submit">Save</Button>
+          <div className="flex flex-col gap-2 sm:col-span-2 sm:flex-row">
+            <Button type="submit" className="w-full sm:w-auto">
+              Save
+            </Button>
           </div>
         )}
       </form>
       {canDelete && member?.id && (
         <form action={deleteMember} className="mt-8">
           <input type="hidden" name="id" value={member.id} />
-          <Button type="submit" variant="destructive">
+          <Button type="submit" variant="destructive" className="w-full sm:w-auto">
             Delete member
           </Button>
         </form>
@@ -132,6 +137,7 @@ function Field({
         required={required}
         readOnly={readOnly}
         defaultValue={defaultValue ?? ""}
+        className="min-w-0"
       />
     </div>
   )

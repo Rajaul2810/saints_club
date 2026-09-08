@@ -2,7 +2,7 @@ import type { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
 
 export const fieldClass = cn(
-  "mt-1.5 w-full rounded-lg border border-border bg-white px-3 py-2.5 text-sm outline-none transition",
+  "mt-1.5 box-border w-full min-w-0 max-w-full rounded-lg border border-border bg-white px-3 py-2.5 text-sm outline-none transition",
   "focus:border-ink focus:ring-1 focus:ring-ink/15"
 )
 

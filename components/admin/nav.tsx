@@ -45,11 +45,10 @@ export function AdminNav({ role }: { role: AppRole }) {
 
   return (
     <>
-      {/* Desktop / tablet sidebar */}
-      <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
+      <aside className="hidden min-w-0 lg:sticky lg:top-24 lg:block lg:self-start">
         <div className="rounded-2xl border border-border/80 bg-white p-3 shadow-sm shadow-ink/4">
           <p className="mb-2 inline-flex items-center gap-2 px-2 text-[11px] font-medium tracking-[0.16em] text-primary uppercase">
-            <Shield className="size-3.5" aria-hidden />
+            <Shield className="size-3.5 shrink-0" aria-hidden />
             Manage
           </p>
           <nav className="flex flex-col gap-1" aria-label="Admin">
@@ -60,14 +59,14 @@ export function AdminNav({ role }: { role: AppRole }) {
                   key={href}
                   href={href}
                   className={cn(
-                    "inline-flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors",
+                    "inline-flex min-w-0 items-center gap-2.5 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors",
                     active
                       ? "bg-primary text-white shadow-sm shadow-primary/20"
                       : "text-ink/65 hover:bg-mist hover:text-ink"
                   )}
                 >
                   <Icon className="size-4 shrink-0" aria-hidden />
-                  {label}
+                  <span className="truncate">{label}</span>
                 </Link>
               )
             })}
@@ -75,64 +74,37 @@ export function AdminNav({ role }: { role: AppRole }) {
         </div>
       </aside>
 
-      {/* Mobile / tablet top chip scroller */}
-      <div className="lg:hidden">
-        <div className="-mx-4 overflow-x-auto px-4 scrollbar-none">
-          <nav
-            className="flex w-max gap-1.5 pb-1"
-            aria-label="Admin sections"
-          >
-            {tabs.map(({ href, label, icon: Icon }) => {
+      <nav
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-white/95 backdrop-blur-md lg:hidden"
+        aria-label="Admin navigation"
+        style={{ paddingBottom: "max(0.4rem, env(safe-area-inset-bottom))" }}
+      >
+        <div className="mx-auto max-w-6xl overflow-x-auto overscroll-x-contain px-2 pt-1.5 scrollbar-none">
+          <div className="flex w-max min-w-full items-stretch justify-start gap-1 sm:justify-center">
+            {tabs.map(({ href, short, icon: Icon }) => {
               const active = isActive(pathname, href)
               return (
                 <Link
                   key={href}
                   href={href}
                   className={cn(
-                    "inline-flex shrink-0 items-center gap-2 rounded-full px-3.5 py-2 text-[13px] font-medium transition-colors",
-                    active
-                      ? "bg-primary text-white shadow-sm shadow-primary/20"
-                      : "border border-border bg-white text-ink/70 hover:bg-mist hover:text-ink"
+                    "flex w-18 shrink-0 flex-col items-center gap-0.5 rounded-xl px-1 py-1 text-[10px] font-medium transition-colors",
+                    active ? "text-primary" : "text-ink/45"
                   )}
                 >
-                  <Icon className="size-3.5 shrink-0" aria-hidden />
-                  {label}
+                  <span
+                    className={cn(
+                      "grid size-8 place-items-center rounded-full transition-colors",
+                      active ? "bg-primary/10 text-primary" : "bg-transparent"
+                    )}
+                  >
+                    <Icon className="size-4" aria-hidden />
+                  </span>
+                  <span className="max-w-full truncate">{short}</span>
                 </Link>
               )
             })}
-          </nav>
-        </div>
-      </div>
-
-      {/* Mobile bottom bar */}
-      <nav
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-white/95 px-1 pt-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] backdrop-blur-md lg:hidden"
-        aria-label="Admin quick nav"
-      >
-        <div className="mx-auto flex max-w-6xl items-stretch justify-around gap-0.5">
-          {tabs.slice(0, 5).map(({ href, short, icon: Icon }) => {
-            const active = isActive(pathname, href)
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl px-1 py-1.5 text-[10px] font-medium transition-colors",
-                  active ? "text-primary" : "text-ink/50"
-                )}
-              >
-                <span
-                  className={cn(
-                    "grid size-8 place-items-center rounded-full transition-colors",
-                    active ? "bg-primary/10 text-primary" : "text-ink/45"
-                  )}
-                >
-                  <Icon className="size-4" aria-hidden />
-                </span>
-                <span className="truncate">{short}</span>
-              </Link>
-            )
-          })}
+          </div>
         </div>
       </nav>
     </>
