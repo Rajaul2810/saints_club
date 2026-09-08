@@ -15,6 +15,11 @@ import {
   Sparkles,
   Images,
   CalendarDays,
+  Scale,
+  Flame,
+  UserRound,
+  ScrollText,
+  Bell,
   type LucideIcon,
 } from "lucide-react"
 import { Logo } from "@/components/layout/logo"
@@ -31,6 +36,10 @@ const childIcons: Record<string, LucideIcon> = {
   "/facilities": Sparkles,
   "/gallery": Images,
   "/activities": CalendarDays,
+  "/governance/house-rules": Scale,
+  "/governance/gas-rules": Flame,
+  "/governance/guest-rules": UserRound,
+  "/governance/policies": ScrollText,
 }
 
 function pathOf(href: string) {
@@ -53,10 +62,17 @@ function isChildActive(pathname: string, href: string) {
   return pathname === base || pathname.startsWith(`${base}/`)
 }
 
-export function Navbar({ auth }: { auth?: ReactNode }) {
+export function Navbar({
+  auth,
+  noticeCount = 0,
+}: {
+  auth?: ReactNode
+  noticeCount?: number
+}) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openGroup, setOpenGroup] = useState<string | null>(null)
+  const noticesActive = pathname === "/notices" || pathname.startsWith("/notices/")
 
   useEffect(() => {
     setMobileOpen(false)
@@ -77,7 +93,8 @@ export function Navbar({ auth }: { auth?: ReactNode }) {
 
         <DesktopNav pathname={pathname} />
 
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+        <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5">
+          <NoticesIconLink active={noticesActive} count={noticeCount} />
           {auth}
           <Link
             href="/membership"
@@ -115,6 +132,40 @@ export function Navbar({ auth }: { auth?: ReactNode }) {
   )
 }
 
+function NoticesIconLink({
+  active,
+  count,
+}: {
+  active: boolean
+  count: number
+}) {
+  return (
+    <Link
+      href="/notices"
+      aria-label={count > 0 ? `Notices (${count})` : "Notices"}
+      title="Notices"
+      className={cn(
+        "relative inline-flex size-9 items-center justify-center rounded-full transition-colors",
+        active
+          ? "bg-primary text-white shadow-sm shadow-primary/25"
+          : "bg-primary/10 text-primary hover:bg-primary hover:text-white"
+      )}
+    >
+      <Bell className="size-4" aria-hidden />
+      {count > 0 && (
+        <span
+          className={cn(
+            "absolute -top-0.5 -right-0.5 grid min-w-4 place-items-center rounded-full px-1 text-[10px] font-semibold leading-4",
+            active ? "bg-white text-primary" : "bg-primary text-white"
+          )}
+        >
+          {count > 99 ? "99+" : count}
+        </span>
+      )}
+    </Link>
+  )
+}
+
 function DesktopNav({ pathname }: { pathname: string }) {
   return (
     <nav
@@ -129,12 +180,15 @@ function DesktopNav({ pathname }: { pathname: string }) {
             key={link.href}
             href={link.href}
             className={cn(
-              "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+              "inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               isLinkActive(pathname, link)
                 ? "bg-primary/10 text-primary"
                 : "text-ink/70 hover:bg-mist hover:text-ink"
             )}
           >
+            {link.href === "/notices" && (
+              <Bell className="size-3.5" aria-hidden />
+            )}
             {link.label}
           </Link>
         )
@@ -283,10 +337,13 @@ function MobileNav({
               href={link.href}
               onClick={onClose}
               className={cn(
-                "border-b border-border/70 py-3.5 text-[15px] font-medium last:border-b-0",
+                "inline-flex items-center gap-2 border-b border-border/70 py-3.5 text-[15px] font-medium last:border-b-0",
                 isLinkActive(pathname, link) ? "text-primary" : "text-ink"
               )}
             >
+              {link.href === "/notices" && (
+                <Bell className="size-4" aria-hidden />
+              )}
               {link.label}
             </Link>
           )

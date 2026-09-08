@@ -11,7 +11,7 @@ const display = Outfit({
 })
 
 const body = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+  subsets: ["latin"], 
   variable: "--font-body",
   display: "swap",
 })
@@ -36,6 +36,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", display.variable, body.variable, "font-sans")}
       data-scroll-behavior="smooth"
+      data-theme="light"
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>

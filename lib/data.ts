@@ -338,6 +338,85 @@ export const conductPoints = [
   "Appeals from disciplinary findings lie to the Appellate Committee. Certain disputes may be referred to Arbitration.",
 ]
 
+export type GovernanceRule = {
+  slug: string
+  title: string
+  description: string
+  intro: string
+  points: string[]
+}
+
+export const governanceRules: GovernanceRule[] = [
+  {
+    slug: "house-rules",
+    title: "House Rules",
+    description: "Courtesy, dress, and conduct inside the Club",
+    intro:
+      "These house rules keep Saints Club Limited a welcoming, orderly place for members, spouses, dependent children, and introduced guests.",
+    points: [
+      "Members and guests must treat staff, fellow members, and Club property with courtesy at all times.",
+      "Dress should be neat and appropriate to the room in use; the Secretariat may publish room-specific standards.",
+      "Children under 24 remain the responsibility of the accompanying member while on Club premises.",
+      "Mobile calls in dining rooms and lounges should be brief and discreet; loudspeaker use is not permitted.",
+      "Smoking and vaping are allowed only in designated areas, including the Mercedes Benz Cigar Bar.",
+      "Damage to Club property must be reported promptly; the member may be billed for repair or replacement.",
+      "Misconduct may be referred to the Disciplinary Committee under the Articles of Association.",
+    ],
+  },
+  {
+    slug: "gas-rules",
+    title: "Gas Rules",
+    description: "Kitchen, heating, and gas safety on Club premises",
+    intro:
+      "Demo gas-safety rules for kitchens, service areas, and any gas appliances on Club premises. Replace with the Club’s official policy when available.",
+    points: [
+      "Only authorised staff may operate commercial kitchen gas equipment and main shut-off valves.",
+      "Members must not interfere with boilers, heaters, or other fixed gas installations.",
+      "Any smell of gas, flame irregularity, or appliance fault must be reported to duty staff immediately.",
+      "Portable gas cylinders and camping stoves are not permitted in member areas without written approval.",
+      "Private catering that uses gas appliances requires prior clearance from the Secretariat.",
+      "Emergency exits and gas shut-off points must remain clear of furniture and storage.",
+      "In an emergency, follow staff instructions and evacuate via the nearest marked exit.",
+    ],
+  },
+  {
+    slug: "guest-rules",
+    title: "Guest Rules",
+    description: "Introducing and hosting guests at the Club",
+    intro:
+      "Guests enjoy the house by introduction. These demo rules set expectations for hosts and visitors.",
+    points: [
+      "Every guest must be introduced by a member in good standing and signed in at reception where required.",
+      "The introducing member is responsible for the guest’s conduct and any charges incurred.",
+      "Guest privileges may be limited by room, day, or event as published by the Secretariat.",
+      "Reciprocal-club visitors should present a valid letter of introduction or membership proof.",
+      "Guests may not book Club spaces in their own name or bring further visitors without approval.",
+      "The Board may refuse admission to any guest whose presence would disturb the harmony of the house.",
+      "Repeated guest misuse may affect the introducing member’s privileges.",
+    ],
+  },
+  {
+    slug: "policies",
+    title: "Other Rules & Policy",
+    description: "Subscriptions, privacy, bookings, and general policy",
+    intro:
+      "Additional Club policies covering subscriptions, privacy, facility use, and related matters. Demo text for layout — confirm with the Secretariat.",
+    points: [
+      "Monthly subscriptions and other dues are payable as billed; arrears may suspend house privileges.",
+      "Personal data held for membership is used for Club administration under applicable privacy law.",
+      "Facility bookings are confirmed only when the Secretariat accepts the request and any deposit.",
+      "Photography for commercial use requires prior written permission from the Club.",
+      "Notices, circulars, and Board decisions published on the notice board form part of Club policy.",
+      "Amendments to these rules are notified to members and take effect as stated in the notice.",
+      "Questions on interpretation should be addressed to the Secretariat in writing.",
+    ],
+  },
+]
+
+export function getGovernanceRule(slug: string) {
+  return governanceRules.find((rule) => rule.slug === slug) ?? null
+}
+
 export const facilities = [
   {
     id: "f1",
@@ -1048,7 +1127,33 @@ export const navLinks: NavLink[] = [
       },
     ],
   },
-  { href: "/notices", label: "Notices" },
+  {
+    href: "/governance",
+    label: "Governance",
+    children: [
+      {
+        href: "/governance/house-rules",
+        label: "House Rules",
+        description: "Courtesy, dress, and conduct in the house",
+      },
+      {
+        href: "/governance/gas-rules",
+        label: "Gas Rules",
+        description: "Kitchen and gas safety on Club premises",
+      },
+      {
+        href: "/governance/guest-rules",
+        label: "Guest Rules",
+        description: "Introducing and hosting guests",
+      },
+      {
+        href: "/governance/policies",
+        label: "Other Rules & Policy",
+        description: "Subscriptions, privacy, and general policy",
+      },
+    ],
+  },
+  // { href: "/notices", label: "Notices" },
   { href: "/contact", label: "Contact" },
 ]
 
@@ -1062,6 +1167,7 @@ export const footerLinks = [
   { href: "/events", label: "Events" },
   { href: "/news", label: "News" },
   { href: "/governance", label: "Governance" },
+  { href: "/governance/house-rules", label: "House Rules" },
   { href: "/notices", label: "Notices" },
   { href: "/committee", label: "Board of Directors" },
   { href: "/contact", label: "Contact" },
